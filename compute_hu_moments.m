@@ -9,6 +9,8 @@ function hu_moments_vector = compute_hu_moments(image)
 %    hu_moments_vector - hu moment features vector
 %
 %------------- BEGIN CODE --------------
+    tic
+    
     close all
     
     im = im2double(image);
@@ -46,5 +48,6 @@ function hu_moments_vector = compute_hu_moments(image)
     fprintf("%4s %f\n", 'h6: ', h6);
     fprintf("%4s %f\n", 'h7: ', h7);
     
+    toc
 end
 %------------- END OF CODE --------------
