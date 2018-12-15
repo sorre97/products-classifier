@@ -12,8 +12,9 @@ function moment_m_n = moment(m, n, image, mode)
 %------------- BEGIN CODE --------------
     close all
     
+    moment_m_n = 0;
     % checking if central moment or normal moment
-    if(exist(mode))
+    if(exist('mode', 'var'))
        %baricenter coordinates for central moment
         ib = moment(1, 0, image) / moment(0, 0, image);
         jb = moment(0, 1, image) / moment(0, 0, image);
