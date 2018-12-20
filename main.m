@@ -5,7 +5,7 @@ NROWS = 2;
 NCOLUMNS = 3;
 
 %original image
-image = im2double(imread('0011.JPG'));
+image = im2double(imread('0014.JPG'));
 figure(1), 
 subplot(2, 3, 1), imshow(image), title("Original image");
 

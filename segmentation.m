@@ -24,6 +24,7 @@ NCOLUMNS = 3;
     % binarizing over RGB channels separately
     BW = imcomplement(imbinarize(R) & imbinarize(G) & imbinarize(B));
     subplot(NROWS, NCOLUMNS, 1), imshow(BW), title("Binarized image");
+    BW = ~imbinarize(rgb2gray(image));
     
     % adding edget to delimit objects better
     edge2 = edge(img, 'Canny', 0.1);
