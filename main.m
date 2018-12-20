@@ -4,8 +4,8 @@ close all
 NROWS = 2;
 NCOLUMNS = 3;
 
-%original image
-image = im2double(imread('0014.JPG'));
+% original image
+image = im2double(imread('0018 (NO).JPG'));
 figure(1), 
 subplot(2, 3, 1), imshow(image), title("Original image");
 
@@ -20,7 +20,13 @@ figure(1),
 subplot(NROWS, NCOLUMNS, 3), imshow(BW), title("Segmentated image");
 
 %% bounding box
-drawBoundingBox(BW);
+%answer = questdlg('Plot bounding box?', ...
+%	'bounding box', ...
+%	'Yes','No', 'Yes');
+answer = 'Yes'
+if(answer == 'Yes')
+    drawBoundingBox(BW);
+end
 
 %% labelling
 [labels, n_labes] = bwlabel(BW);

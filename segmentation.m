@@ -17,38 +17,61 @@ NCOLUMNS = 3;
     img = rgb2gray(image);
     
     %% Binarization
+    
+    % OLD - binarizing over RGB channels separately
+    %{
     R = image(:, :, 1);
     G = image(:, :, 2);
     B = image(:, :, 3);
     
-    % binarizing over RGB channels separately
     BW = imcomplement(imbinarize(R) & imbinarize(G) & imbinarize(B));
     subplot(NROWS, NCOLUMNS, 1), imshow(BW), title("Binarized image");
-    BW = ~imbinarize(rgb2gray(image));
+    BW = ~imbinarize(img);
+    %}
     
-    % adding edget to delimit objects better
+    % using morphological opening to extract background
+    % using light gray colors for objects in order to use morphology 
+    img = imcomplement(rgb2gray(image));
+    SE = strel('disk',60);
+    % extracting background with structure element
+    background = imopen(img,SE);
+    im2 = img - background;
+    % adjusting histogram distribution with gamma correction
+    im3 = imadjust(im2);
+    % binarizing image
+    BW = imbinarize(im3);
+    % removing small imperfections from binarization
+    BW = bwareaopen(BW,50);
+    subplot(NROWS, NCOLUMNS, 1), imshow(BW), title("Binarized image");
+    
+    %% Edge extraction
+    % extracting edge with Canny method
     edge2 = edge(img, 'Canny', 0.1);
     subplot(NROWS, NCOLUMNS, 2), imshow(edge2), title("Edges");
     
+    % adding edges to better delimit objects
     BW = BW | edge2;
     subplot(NROWS, NCOLUMNS, 3), imshow(BW), title("BW edge");
 
-
     %% morphology
     % structuring elemnt
-    SE = [0 1 0; 1 1 1; 0 1 0];
+    SE = strel('disk', 3);
     
-    %dilatation, 3 times 3x3 SE
+    % dilatation to close object borders
     morph = imdilate(BW, SE);
-    morph = imdilate(morph, SE);
-    morph = imdilate(morph, SE);
+    
+    % ALTERNATIVE
+    % dilatation and erosion to connect borders
+    %SE = strel('disk', 6);
+    %morph = imclose(BW, SE);
+    
     subplot(NROWS, NCOLUMNS, 4), imshow(morph), title("Morph dilatation");
     
-    %hole filling
+    % hole filling
     morph = imfill(morph, 'holes');
     subplot(NROWS, NCOLUMNS, 5), imshow(morph), title("Morph holes");
     
-    %opening
+    % opening
     morph = bwareaopen(morph, 2000);
     subplot(NROWS, NCOLUMNS, 6), imshow(morph), title("Morph opening");
     
