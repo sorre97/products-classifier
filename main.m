@@ -5,7 +5,7 @@ NROWS = 2;
 NCOLUMNS = 3;
 
 % original image
-image = im2double(imread('0007.JPG'));
+image = im2double(imread('0025.JPG'));
 figure(1), 
 subplot(2, 3, 1), imshow(image), title("Original image");
 
@@ -15,6 +15,7 @@ figure(1),
 subplot(NROWS, NCOLUMNS, 2), imshow(im), title("White balanced image");
 
 %% binarization
+im = imfilter(im, fspecial('average')); %smoothing
 BW = segmentation(im);
 figure(1), 
 subplot(NROWS, NCOLUMNS, 3), imshow(BW), title("Segmentated image");
@@ -23,7 +24,7 @@ subplot(NROWS, NCOLUMNS, 3), imshow(BW), title("Segmentated image");
 %answer = questdlg('Plot bounding box?', ...
 %	'bounding box', ...
 %	'Yes','No', 'Yes');
-answer = 'Yes'
+answer = 'Yes';
 if(answer == 'Yes')
     drawBoundingBox(BW);
 end

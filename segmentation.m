@@ -32,7 +32,7 @@ NCOLUMNS = 3;
     % using morphological opening to extract background
     % using light gray colors for objects in order to use morphology 
     img = imcomplement(img);
-    SE = strel('disk',60);
+    SE = strel('disk', 60);
     % extracting background with structure element
     background = imopen(img,SE);
     im2 = img - background;
@@ -44,15 +44,18 @@ NCOLUMNS = 3;
     BW = bwareaopen(BW,50);
     subplot(NROWS, NCOLUMNS, 1), imshow(BW), title("Binarized image");
     
-    %% Edge extraction
-    % extracting edge with Canny method
+    %% Edge
+    % Edge extraction using Canny method
     edge2 = edge(img, 'Canny', 0.1);
     subplot(NROWS, NCOLUMNS, 2), imshow(edge2), title("Edges");
     
+    
     % adding edges to better delimit objects
     BW = BW | edge2;
+    %BW = padarray(BW, [3 3], 0, 'both');
     subplot(NROWS, NCOLUMNS, 3), imshow(BW), title("BW edge");
-
+    
+    
     %% morphology
     
     % ALTERNATIVE
@@ -62,10 +65,10 @@ NCOLUMNS = 3;
     %morph = imclose(BW, SE);
     
     SE = strel('disk', 3);
-        
+     
+    % REPLACED BY HOUGH METHOD FOR EDGE LINKING
     % dilatation to close object borders
     morph = imdilate(BW, SE);
-    
     subplot(NROWS, NCOLUMNS, 4), imshow(morph), title("Morph dilatation");
     
     % hole filling
