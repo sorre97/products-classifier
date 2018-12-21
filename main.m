@@ -59,5 +59,9 @@ for i = 1 : (n_labels - 1)
     
     figure(1), NFIGURE = NFIGURE + 1;
     subplot(NROWS, NCOLUMNS, NFIGURE), imshow(ROI), title("ROI");
-    %object_label = classification(ROI);
+    
+    % TODO
+    % Stiamo passando un singolo oggetto al macro_classificatore (bevanda, pasta...)
+    % che risponde con una label associata. 
+    %object_label = macro_classification(ROI);
 end
