@@ -5,22 +5,16 @@ function create_descriptor_files()
   
   nimages = numel(images);
   
-  lbp = [];
-  qhist = []; % rgb quantizzato in 4096 valori
-  cedd = [];
+  %%descriptors array
 
   for n = 1 : nimages
     
-    im = imread(['simplicity/' images{n}]);
-  
-    lbp = [lbp; compute_lbp(im)];
-   
-   qhist = [qhist; compute_qhist(im)];
-   
-   cedd = [cedd; compute_CEDD(im)];
-  
+    im = imread(['dataset/' images{n}]);
+    
+    %%descriptors calculator
+    
   end
      
-  save('descriptors.mat', 'images', 'labels', 'qhist', 'cedd', 'lbp');
+  save('descriptors.mat', 'images', 'labels', 'DESCRIPTORS');
 
 end

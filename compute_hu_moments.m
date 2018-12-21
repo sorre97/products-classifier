@@ -9,9 +9,6 @@ function hu_moments_vector = compute_hu_moments(image)
 %    hu_moments_vector - hu moment features vector
 %
 %------------- BEGIN CODE --------------
-    tic
-    
-    close all
     
    % calculating normalized center moments used by Hu
     V20 = normalized_center_moment(2, 0, image);
@@ -35,19 +32,7 @@ function hu_moments_vector = compute_hu_moments(image)
         ((3 * V12) - V30) * (V03 + V21) * (3 * (V30 + V12)^2 - (V03 + V21)^2);
     
     % output hu moments vector
-    hu_moments_vector = [h1 h2 h3 h4 h5 h6 h7]';
+    hu_moments_vector = [h1 h2 h3 h4 h5 h6 h7];
     
-    %{
-    fprintf("Hu moments:\n");
-    fprintf("%4s %f\n", 'h1: ', h1);
-    fprintf("%4s %f\n", 'h2: ', h2);
-    fprintf("%4s %f\n", 'h3: ', h3);
-    fprintf("%4s %f\n", 'h4: ', h4);
-    fprintf("%4s %f\n", 'h5: ', h5);
-    fprintf("%4s %f\n", 'h6: ', h6);
-    fprintf("%4s %f\n", 'h7: ', h7);
-    %}
-    
-    toc
 end
 %------------- END OF CODE --------------

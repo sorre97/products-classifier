@@ -30,9 +30,5 @@ function moment_m_n = moment(m, n, image, mode)
           moment_m_n = moment_m_n + ((i - ib)^m * (j - jb)^n * image(i, j)); 
        end
     end
-    
-    
-    
-    
 end
 %------------- END OF CODE --------------
