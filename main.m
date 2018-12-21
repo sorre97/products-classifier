@@ -5,7 +5,7 @@ NROWS = 2;
 NCOLUMNS = 3;
 
 % original image
-image = im2double(imread('0018 (NO).JPG'));
+image = im2double(imread('0007.JPG'));
 figure(1), 
 subplot(2, 3, 1), imshow(image), title("Original image");
 
@@ -32,3 +32,6 @@ end
 [labels, n_labes] = bwlabel(BW);
 figure(1), 
 subplot(NROWS, NCOLUMNS, 4), imagesc(labels), axis image, colorbar, title("labelling");
+
+%% mask application
+subplot(NROWS, NCOLUMNS, 5), imshow(BW .* image), title("Mask over original image");

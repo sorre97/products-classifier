@@ -10,7 +10,7 @@ function segmentated_image = segmentation(image)
 %
 %
 %------------- BEGIN CODE --------------
-NROWS = 2;
+NROWS = 3;
 NCOLUMNS = 3;
     
     figure(2)
@@ -31,7 +31,7 @@ NCOLUMNS = 3;
     
     % using morphological opening to extract background
     % using light gray colors for objects in order to use morphology 
-    img = imcomplement(rgb2gray(image));
+    img = imcomplement(img);
     SE = strel('disk',60);
     % extracting background with structure element
     background = imopen(img,SE);
@@ -54,16 +54,17 @@ NCOLUMNS = 3;
     subplot(NROWS, NCOLUMNS, 3), imshow(BW), title("BW edge");
 
     %% morphology
-    % structuring elemnt
-    SE = strel('disk', 3);
-    
-    % dilatation to close object borders
-    morph = imdilate(BW, SE);
     
     % ALTERNATIVE
     % dilatation and erosion to connect borders
-    %SE = strel('disk', 6);
+    % structuring element
+    %SE = strel('square', 8);
     %morph = imclose(BW, SE);
+    
+    SE = strel('disk', 3);
+        
+    % dilatation to close object borders
+    morph = imdilate(BW, SE);
     
     subplot(NROWS, NCOLUMNS, 4), imshow(morph), title("Morph dilatation");
     
@@ -71,9 +72,16 @@ NCOLUMNS = 3;
     morph = imfill(morph, 'holes');
     subplot(NROWS, NCOLUMNS, 5), imshow(morph), title("Morph holes");
     
-    % opening
-    morph = bwareaopen(morph, 2000);
+    % opening to filter small imperfections from dilatation
+    morph = bwareaopen(morph, 1000);
     subplot(NROWS, NCOLUMNS, 6), imshow(morph), title("Morph opening");
+    
+    % paper line filtering with erosion
+    % touching objects handling
+    morph = imerode(morph, SE);
+    morph = imerode(morph, SE);
+    morph = imerode(morph, SE);
+    subplot(NROWS, NCOLUMNS, 7), imshow(morph), title("Morph erosion");
     
     %% end
     segmentated_image = morph;
