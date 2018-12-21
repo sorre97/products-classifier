@@ -76,7 +76,7 @@ NCOLUMNS = 3;
     subplot(NROWS, NCOLUMNS, 5), imshow(morph), title("Morph holes");
     
     % opening to filter small imperfections from dilatation
-    morph = bwareaopen(morph, 1000);
+    morph = bwareaopen(morph, 2000);
     subplot(NROWS, NCOLUMNS, 6), imshow(morph), title("Morph opening");
     
     % paper line filtering with erosion
