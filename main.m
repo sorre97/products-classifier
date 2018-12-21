@@ -36,23 +36,28 @@ end
 figure(1), NFIGURE = NFIGURE + 1;
 subplot(NROWS, NCOLUMNS, NFIGURE), imagesc(labels), axis image, colorbar, title("labelling");
 
+%% mask application
+figure(1), NFIGURE = NFIGURE + 1;
+subplot(NROWS, NCOLUMNS, NFIGURE), imshow(BW .* image), title("Mask over original image");
+
 %% classification
+% for each connected component
 for i = 1 : (n_labels - 1)
     % extracting region of interest
+    % current label mask
     current_label = (labels == i);
+    % finding current mask boundaries
     [rows, columns] = find(labels == i);
     topRow = min(rows);
     bottomRow = max(rows);
     leftColumn = min(columns);
     rightColumn = max(columns);
-    ROI = im .* (current_label);
-    croppedImage = ROI(topRow:bottomRow, leftColumn:rightColumn);
+    % extracting single object with mask
+    objects = im .* (current_label);
+    % cropping region of interest
+    ROI = objects(topRow:bottomRow, leftColumn:rightColumn);
     
     figure(1), NFIGURE = NFIGURE + 1;
-    subplot(NROWS, NCOLUMNS, NFIGURE), imagesc(labels), axis image, colorbar, title("labelling"), imshow(croppedImage);
-    %object = classification(ROI);
+    subplot(NROWS, NCOLUMNS, NFIGURE), imshow(ROI), title("ROI");
+    %object_label = classification(ROI);
 end
-
-%% mask application
-figure(1), NFIGURE = NFIGURE + 1;
-subplot(NROWS, NCOLUMNS, NFIGURE), imshow(BW .* image), title("Mask over original image");
