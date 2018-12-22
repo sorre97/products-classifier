@@ -7,4 +7,5 @@ result = test_classifier(hu, labels, cv);
 
 perf = [result.accuracy];
     
-figure, bar(perf), xlabel("Number of try"), ylabel("Accuracy on test");
+% figure, bar(perf), xlabel("Number of try"), ylabel("Accuracy on test");
+

@@ -20,6 +20,8 @@ function out = test_classifier(descriptors, labels, cv)
   test_predicted = predict(c, test_values);
   test_perf = confmat(test_labels, test_predicted);
   
+  %%EXPORT CLASSIFIER WITH CLASSIFICATION LEARNER
+  
   out = [train_perf, test_perf];
   
 end

@@ -77,5 +77,5 @@ for i = 1 : (n_labels - 1)
     % sentitevi liberi di cambiare i nomi di queste due funzioni 
     % perchè non mi piacciono ma non ho trovato di meglio
     
-    %object_label = macro_classification(ROI);
+    object_label = macro_classification(ROI);
 end
