@@ -1,14 +1,10 @@
-function train_classifier()
-
 load('descriptors.mat');
 
 % partitioning labels in 80% tranining and 20% test
-%cv = cvpartition(labels, 'Holdout', 0.2);
+cv = cvpartition(labels, 'Holdout', 0.2);
 
-%result = test_classifier(hu, labels, cv);
+result = test_classifier(hu, labels, cv);
 
-%perf = [result.accuracy];
+perf = [result.accuracy];
     
-%figure, bar(perf), xlabel("Number of try"), ylabel("Accuracy on test");
-
-end
+figure, bar(perf), xlabel("Number of try"), ylabel("Accuracy on test");
