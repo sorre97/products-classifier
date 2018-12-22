@@ -7,7 +7,7 @@ NFIGURE = 0;
 
 %% intro
 % original image
-image = im2double(imread('0025.JPG'));
+image = im2double(imread('test/0025.JPG'));
 figure(1), NFIGURE = NFIGURE + 1;
 subplot(NROWS, NCOLUMNS, NFIGURE), imshow(image), title("Original image");
 
@@ -46,16 +46,25 @@ for i = 1 : (n_labels - 1)
     % extracting region of interest
     % current label mask
     current_label = (labels == i);
+    
     % finding current mask boundaries
     [rows, columns] = find(labels == i);
     topRow = min(rows);
     bottomRow = max(rows);
     leftColumn = min(columns);
     rightColumn = max(columns);
+    
     % extracting single object with mask
-    objects = im .* (current_label);
+    object = im .* (current_label);
+    objectR = object(:, :, 1);
+    objectG = object(:, :, 2);
+    objectB = object(:, :, 3);
+    
     % cropping region of interest
-    ROI = objects(topRow:bottomRow, leftColumn:rightColumn);
+    ROI = zeros(bottomRow - topRow + 1, rightColumn - leftColumn + 1);
+    ROI(:, :, 1) = objectR(topRow:bottomRow, leftColumn:rightColumn);
+    ROI(:, :, 2) = objectG(topRow:bottomRow, leftColumn:rightColumn);
+    ROI(:, :, 3) = objectB(topRow:bottomRow, leftColumn:rightColumn);
     
     figure(1), NFIGURE = NFIGURE + 1;
     subplot(NROWS, NCOLUMNS, NFIGURE), imshow(ROI), title("ROI");

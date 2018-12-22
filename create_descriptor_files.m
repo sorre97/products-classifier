@@ -1,22 +1,23 @@
 function create_descriptor_files()
-  % Calcola i descrittori delle immagini e li salva su file.
-
+  %% importing file list and labels
   [images, labels] = readlists();
   
   nimages = numel(images);
   
-  %%descriptors array
-  m = [];
-
+  % feature vector
+  hu = [];
+    
+  %% feature extraction
   for n = 1 : nimages
+    % reading image
+    im = rgb2gray(im2double(imread(['dataset/' images{n}])));
     
-    im = imread(['dataset/' images{n}]);
-    
-    %%descriptors calculator
-    m = [m; mean(im(:))];
+    % calculate hu descriptors
+    hu = [hu; compute_hu_moments(im)];
     
   end
      
-  save('descriptors.mat', 'images', 'labels', 'm');
+  %% saving workspace
+  save('descriptors.mat', 'images', 'labels', 'hu');
 
 end
