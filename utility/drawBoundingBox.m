@@ -13,12 +13,12 @@ function  drawBoundingBox(BW)
 NROWS = 4;
 NCOLUMNS = 3;
 
-    figure(3),
+    %figure(3),
     'hold on';
     boxes = regionprops(BW, 'BoundingBox');
     for i = 1 : length(boxes)
        points = boxes(i).BoundingBox;
-       rectangle('Position', points, 'EdgeColor', 'r', 'LineWidth', 3);
+       rectangle('Position', points, 'EdgeColor', 'r', 'LineWidth', 1.5);
     end
     'hold off';
     

@@ -7,12 +7,12 @@ NFIGURE = 0;
 
 %% intro
 % original image
-image = im2double(imread('test/0015.JPG'));
+labelled_image = im2double(imread('test/0015.JPG'));
 figure(1), NFIGURE = NFIGURE + 1;
-subplot(NROWS, NCOLUMNS, NFIGURE), imshow(image), title("Original image");
+subplot(NROWS, NCOLUMNS, NFIGURE), imshow(labelled_image), title("Original image");
 
 %% white balancing
-im = white_balance(image);
+im = white_balance(labelled_image);
 figure(1), NFIGURE = NFIGURE + 1;
 subplot(NROWS, NCOLUMNS, NFIGURE), imshow(im), title("White balanced image");
 
@@ -30,7 +30,7 @@ subplot(NROWS, NCOLUMNS, NFIGURE), imagesc(labels), axis image, colorbar, title(
 
 %% mask application
 figure(1), NFIGURE = NFIGURE + 1;
-subplot(NROWS, NCOLUMNS, NFIGURE), imshow(BW .* image), title("Mask over original image");
+subplot(NROWS, NCOLUMNS, NFIGURE), imshow(BW .* labelled_image), title("Mask over original image");
 
 %% macro classification
 % for each connected component
@@ -46,8 +46,8 @@ for i = 1 : n_labels
     bottomRow = max(rows);
     leftColumn = min(columns);
     rightColumn = max(columns);
+    center = [((leftColumn + rightColumn)/2) ((topRow + bottomRow)/2)];
     
-    centroid = [((leftColumn + rightColumn)/2) ((topRow + bottomRow)/2)];
     % extracting single object with mask
     object = im .* (current_label);
     objectR = object(:, :, 1);
@@ -60,13 +60,17 @@ for i = 1 : n_labels
     ROI(:, :, 2) = objectG(topRow:bottomRow, leftColumn:rightColumn);
     ROI(:, :, 3) = objectB(topRow:bottomRow, leftColumn:rightColumn);
     
-    figure(1), NFIGURE = NFIGURE + 1;
-    subplot(NROWS, NCOLUMNS, NFIGURE), imshow(ROI), title("ROI");
+    % individual ROI
+    %figure, imshow(ROI), title("ROI");
     
-    
+    % macro classification
     object_label = macro_classification(ROI);
-    image = insertText(image, centroid, char(object_label), ...
+    
+    % macro labelling
+    labelled_image = insertText(labelled_image, center, char(object_label), ...
         'FontSize', 20, 'BoxColor', 'white', 'AnchorPoint', 'Center');
+    figure(1),
+    subplot(NROWS, NCOLUMNS, NFIGURE + 1), imshow(labelled_image), title('Labelled image');
     
 %% sub classification
 %     if (object_label == 'drinks')
@@ -76,15 +80,15 @@ for i = 1 : n_labels
     
 end
 
-drawBoundingBox(BW);
+
 %% bounding box
-% answer = questdlg('Plot bounding box?', ...
+%answer = questdlg('Plot bounding box?', ...
 % 	'bounding box', ...
-% 	'Yes','No','Yes');
-% % answer = 'Yes';
-% if(answer == 'Yes')
-%     figure(3), imshow(image), title("Labelled image");
-%     drawBoundingBox(BW);
-% elseif(answer == 'No')
-%     figure(3), imshow(image), title("Labelled image");
-% end
+% 	'Yes','Nope','Yes');
+answer = 'Yes';
+% Handle response
+switch answer
+    case 'Yes'
+        figure(1), subplot(NROWS, NCOLUMNS, NFIGURE + 2), imshow(labelled_image), title("Bounding box image");
+        drawBoundingBox(BW);
+end
