@@ -20,8 +20,8 @@ function out = test_macro_classifier(descriptors, labels, cv)
   test_predicted = predict(c, test_values);
   test_perf = confmat(test_labels, test_predicted);
   
-  %%EXPORT CLASSIFIER WITH CLASSIFICATION LEARNER
+  % exporting classifier
   out = [train_perf, test_perf];
-  saveCompactModel(c, 'macroClassificationKNN');
+  saveCompactModel(c, 'classificators/macroClassificationKNN');
   
 end

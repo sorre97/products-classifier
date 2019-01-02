@@ -18,6 +18,6 @@ function create_macro_descriptor_files()
   end
      
   %% saving workspace
-  save('descriptors.mat', 'images', 'labels', 'hu');
+  save('descriptors/descriptors.mat', 'images', 'labels', 'hu');
 
 end
