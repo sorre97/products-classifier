@@ -13,6 +13,7 @@ function out = test_macro_classifier(descriptors, labels, cv)
   
   % classificator training
   c = fitcknn(train_values, train_labels, 'NumNeighbors', 5);
+  %c = fitcsvm(train_values, train_labels);
   
   train_predicted = predict(c, train_values);
   train_perf = confmat(train_labels, train_predicted);
