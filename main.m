@@ -7,7 +7,7 @@ NFIGURE = 0;
 
 %% intro
 % original image
-image = im2double(imread('test/0001.JPG'));
+image = im2double(imread('test/0015.JPG'));
 figure(1), NFIGURE = NFIGURE + 1;
 subplot(NROWS, NCOLUMNS, NFIGURE), imshow(image), title("Original image");
 
@@ -32,7 +32,7 @@ subplot(NROWS, NCOLUMNS, NFIGURE), imagesc(labels), axis image, colorbar, title(
 figure(1), NFIGURE = NFIGURE + 1;
 subplot(NROWS, NCOLUMNS, NFIGURE), imshow(BW .* image), title("Mask over original image");
 
-%% classification
+%% macro classification
 % for each connected component
 
 for i = 1 : n_labels
@@ -47,7 +47,7 @@ for i = 1 : n_labels
     leftColumn = min(columns);
     rightColumn = max(columns);
     
-    position = [((leftColumn + rightColumn)/2) ((topRow + bottomRow)/2)];
+    centroid = [((leftColumn + rightColumn)/2) ((topRow + bottomRow)/2)];
     % extracting single object with mask
     object = im .* (current_label);
     objectR = object(:, :, 1);
@@ -60,27 +60,22 @@ for i = 1 : n_labels
     ROI(:, :, 2) = objectG(topRow:bottomRow, leftColumn:rightColumn);
     ROI(:, :, 3) = objectB(topRow:bottomRow, leftColumn:rightColumn);
     
-    %figure(1), NFIGURE = NFIGURE + 1;
-    %subplot(NROWS, NCOLUMNS, NFIGURE), imshow(ROI), title("ROI");
+    figure(1), NFIGURE = NFIGURE + 1;
+    subplot(NROWS, NCOLUMNS, NFIGURE), imshow(ROI), title("ROI");
     
-    %% TODO
-    % Stiamo passando un singolo oggetto al macro_classificatore (bevanda, pasta...)
-    % che risponde con una label associata.
-    % Bisogna prima di tutto trainare il classificatore
-    % nei relativi file (test_classifier e train_classifier)
-    % sentitevi liberi di cambiare i nomi di queste due funzioni 
-    % perchè non mi piacciono ma non ho trovato di meglio
     
     object_label = macro_classification(ROI);
+    image = insertText(image, centroid, char(object_label), ...
+        'FontSize', 20, 'BoxColor', 'white', 'AnchorPoint', 'Center');
+    
+%% sub classification
 %     if (object_label == 'drinks')
 %         object_label = drink_classification(ROI);
 %     end
-    image = insertText(image, position, char(object_label), ...
-        'FontSize', 20, 'BoxColor', 'white', 'AnchorPoint', 'Center');
+    
     
 end
 
-figure(3), imshow(image), title("Labelled image");
 drawBoundingBox(BW);
 %% bounding box
 % answer = questdlg('Plot bounding box?', ...
