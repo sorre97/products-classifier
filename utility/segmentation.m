@@ -65,12 +65,10 @@ NCOLUMNS = 3;
     %morph = imclose(BW, SE);
     
     SE = strel('disk', 3);
-     
-    % REPLACED BY HOUGH METHOD FOR EDGE LINKING
+
     % dilatation to close object borders
-    %morph = imerode(BW, SE);
-    morph = imdilate(BW, SE);
-    %morph = imdilate(morph, SE);
+    morph = bwareaopen(BW, 4000);
+    morph = imdilate(morph, SE);
     subplot(NROWS, NCOLUMNS, 4), imshow(morph), title("Morph dilatation");
     
     % hole filling

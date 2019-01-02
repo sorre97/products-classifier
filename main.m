@@ -7,12 +7,12 @@ NFIGURE = 0;
 
 %% intro
 % original image
-labelled_image = im2double(imread('test/0015.JPG'));
+image = im2double(imread('test/0033.JPG'));
 figure(1), NFIGURE = NFIGURE + 1;
-subplot(NROWS, NCOLUMNS, NFIGURE), imshow(labelled_image), title("Original image");
+subplot(NROWS, NCOLUMNS, NFIGURE), imshow(image), title("Original image");
 
 %% white balancing
-im = white_balance(labelled_image);
+im = white_balance(image);
 figure(1), NFIGURE = NFIGURE + 1;
 subplot(NROWS, NCOLUMNS, NFIGURE), imshow(im), title("White balanced image");
 
@@ -30,11 +30,10 @@ subplot(NROWS, NCOLUMNS, NFIGURE), imagesc(labels), axis image, colorbar, title(
 
 %% mask application
 figure(1), NFIGURE = NFIGURE + 1;
-subplot(NROWS, NCOLUMNS, NFIGURE), imshow(BW .* labelled_image), title("Mask over original image");
+subplot(NROWS, NCOLUMNS, NFIGURE), imshow(BW .* image), title("Mask over original image");
 
 %% macro classification
 % for each connected component
-
 for i = 1 : n_labels
     % extracting region of interest
     % current label mask
@@ -67,10 +66,14 @@ for i = 1 : n_labels
     object_label = macro_classification(ROI);
     
     % macro labelling
+    if(i == 1)
+        NFIGURE = NFIGURE + 1;
+        labelled_image = image;
+    end
     labelled_image = insertText(labelled_image, center, char(object_label), ...
         'FontSize', 20, 'BoxColor', 'white', 'AnchorPoint', 'Center');
     figure(1),
-    subplot(NROWS, NCOLUMNS, NFIGURE + 1), imshow(labelled_image), title('Labelled image');
+    subplot(NROWS, NCOLUMNS, NFIGURE), imshow(labelled_image), title('Labelled image');
     
 %% sub classification
 %     if (object_label == 'drinks')
@@ -89,6 +92,7 @@ answer = 'Yes';
 % Handle response
 switch answer
     case 'Yes'
-        figure(1), subplot(NROWS, NCOLUMNS, NFIGURE + 2), imshow(labelled_image), title("Bounding box image");
+        figure(1), NFIGURE = NFIGURE + 1;
+        subplot(NROWS, NCOLUMNS, NFIGURE), imshow(labelled_image), title("Bounding box image");
         drawBoundingBox(BW);
 end

@@ -1,8 +1,8 @@
 % loads photos, white balances them and renames according to counter
-d = uigetdir(pwd, 'prova');
+d = uigetdir(pwd, 'tmp');
 files = dir(fullfile(d, '*.JPG'));
 
-COUNTER = 100;
+COUNTER = 306;
 for i = 1 : numel(files)
    image = files(i);
    im = imread([image.folder '/' image.name]);

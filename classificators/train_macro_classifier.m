@@ -1,4 +1,4 @@
-load('descriptors.mat');
+load('descriptors/descriptors.mat');
 
 % partitioning labels in 80% tranining and 20% test
 cv = cvpartition(labels, 'Holdout', 0.2);

@@ -1,6 +1,6 @@
-COUNTER = 1;
-END = 305;
-for i = 1 : END
+COUNTER = 306;
+END = 441;
+for i = COUNTER : END
     
    if(COUNTER < 10)
        fprintf("%s\n",['000' num2str(COUNTER) '.JPG']);
