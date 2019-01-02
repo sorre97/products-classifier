@@ -13,6 +13,7 @@ function object_label = macro_classification(ROI)
 
 hu = compute_hu_moments(rgb2gray(ROI));
 
+
 %%IMPORT CLASSIFIER
 CompactMdl = loadCompactModel('classificators/macroClassificationKNN.mat');
 object_label = predict(CompactMdl, hu); 
