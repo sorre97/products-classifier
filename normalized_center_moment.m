@@ -10,7 +10,6 @@ function normalized_central_moment_m_n = normalized_center_moment(m, n, image)
 %    normalized_central_moment_m_n - normalized center moment of order m, n
 % 
 %------------- BEGIN CODE --------------
-    close all
     
     % alpha factor
     alpha = (m + n)/2 + 1;

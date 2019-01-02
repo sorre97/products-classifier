@@ -10,7 +10,6 @@ function moment_m_n = moment(m, n, image, mode)
 %    moment_m_n - moment of order m, n. Central moment if specified
 % 
 %------------- BEGIN CODE --------------
-    close all
     moment_m_n = 0;
     % checking if central moment or normal moment
     if(exist('mode', 'var'))

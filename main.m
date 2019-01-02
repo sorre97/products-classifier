@@ -7,7 +7,7 @@ NFIGURE = 0;
 
 %% intro
 % original image
-image = im2double(imread('test/0025.JPG'));
+image = im2double(imread('test/0001.JPG'));
 figure(1), NFIGURE = NFIGURE + 1;
 subplot(NROWS, NCOLUMNS, NFIGURE), imshow(image), title("Original image");
 
@@ -22,14 +22,6 @@ BW = segmentation(im);
 figure(1), NFIGURE = NFIGURE + 1;
 subplot(NROWS, NCOLUMNS, NFIGURE), imshow(BW), title("Segmentated image");
 
-%% bounding box
-%answer = questdlg('Plot bounding box?', ...
-%	'bounding box', ...
-%	'Yes','No', 'Yes');
-answer = 'Yes';
-if(answer == 'Yes')
-    drawBoundingBox(BW);
-end
 
 %% labelling
 [labels, n_labels] = bwlabel(BW);
@@ -42,7 +34,8 @@ subplot(NROWS, NCOLUMNS, NFIGURE), imshow(BW .* image), title("Mask over origina
 
 %% classification
 % for each connected component
-for i = 1 : (n_labels - 1)
+
+for i = 1 : n_labels
     % extracting region of interest
     % current label mask
     current_label = (labels == i);
@@ -54,6 +47,7 @@ for i = 1 : (n_labels - 1)
     leftColumn = min(columns);
     rightColumn = max(columns);
     
+    position = [((leftColumn + rightColumn)/2) ((topRow + bottomRow)/2)];
     % extracting single object with mask
     object = im .* (current_label);
     objectR = object(:, :, 1);
@@ -66,8 +60,8 @@ for i = 1 : (n_labels - 1)
     ROI(:, :, 2) = objectG(topRow:bottomRow, leftColumn:rightColumn);
     ROI(:, :, 3) = objectB(topRow:bottomRow, leftColumn:rightColumn);
     
-    figure(1), NFIGURE = NFIGURE + 1;
-    subplot(NROWS, NCOLUMNS, NFIGURE), imshow(ROI), title("ROI");
+    %figure(1), NFIGURE = NFIGURE + 1;
+    %subplot(NROWS, NCOLUMNS, NFIGURE), imshow(ROI), title("ROI");
     
     %% TODO
     % Stiamo passando un singolo oggetto al macro_classificatore (bevanda, pasta...)
@@ -78,4 +72,21 @@ for i = 1 : (n_labels - 1)
     % perchè non mi piacciono ma non ho trovato di meglio
     
     object_label = macro_classification(ROI);
+    image = insertText(image, position, char(object_label), ...
+        'FontSize', 20, 'BoxColor', 'white', 'AnchorPoint', 'Center');
+    
+end
+
+figure(3), imshow(image), title("Labelled image");
+drawBoundingBox(BW);
+%% bounding box
+% answer = questdlg('Plot bounding box?', ...
+% 	'bounding box', ...
+% 	'Yes','No','Yes');
+% % answer = 'Yes';
+% if(answer == 'Yes')
+%     figure(3), imshow(image), title("Labelled image");
+%     drawBoundingBox(BW);
+% elseif(answer == 'No')
+%     figure(3), imshow(image), title("Labelled image");
 end

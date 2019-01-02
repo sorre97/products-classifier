@@ -68,7 +68,9 @@ NCOLUMNS = 3;
      
     % REPLACED BY HOUGH METHOD FOR EDGE LINKING
     % dilatation to close object borders
+    %morph = imerode(BW, SE);
     morph = imdilate(BW, SE);
+    %morph = imdilate(morph, SE);
     subplot(NROWS, NCOLUMNS, 4), imshow(morph), title("Morph dilatation");
     
     % hole filling
@@ -81,6 +83,7 @@ NCOLUMNS = 3;
     
     % paper line filtering with erosion
     % touching objects handling
+    morph = imerode(morph, SE);
     morph = imerode(morph, SE);
     morph = imerode(morph, SE);
     morph = imerode(morph, SE);

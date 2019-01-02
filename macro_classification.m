@@ -14,7 +14,7 @@ function object_label = macro_classification(ROI)
 hu = compute_hu_moments(ROI);
 
 %%IMPORT CLASSIFIER
-%CompactMdl = loadCompactModel('myCart');
+CompactMdl = loadCompactModel('classificationKNN.mat');
 object_label = predict(CompactMdl, hu); 
 end
 %------------- END OF CODE --------------
