@@ -1,4 +1,4 @@
-function create_descriptor_files()
+function create_macro_descriptor_files()
   %% importing file list and labels
   [images, labels] = readlists();
   
@@ -11,7 +11,6 @@ function create_descriptor_files()
   for n = 1 : nimages
     % reading image
     im = rgb2gray(im2double(imread(['dataset/' images{n}])));
-    nimages
     
     % calculate hu descriptors
     hu = [hu; compute_hu_moments(im)];

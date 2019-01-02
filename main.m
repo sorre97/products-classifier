@@ -72,6 +72,9 @@ for i = 1 : n_labels
     % perchè non mi piacciono ma non ho trovato di meglio
     
     object_label = macro_classification(ROI);
+%     if (object_label == 'drinks')
+%         object_label = drink_classification(ROI);
+%     end
     image = insertText(image, position, char(object_label), ...
         'FontSize', 20, 'BoxColor', 'white', 'AnchorPoint', 'Center');
     
@@ -89,4 +92,4 @@ drawBoundingBox(BW);
 %     drawBoundingBox(BW);
 % elseif(answer == 'No')
 %     figure(3), imshow(image), title("Labelled image");
-end
+% end
