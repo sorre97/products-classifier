@@ -7,7 +7,7 @@ NFIGURE = 0;
 
 %% intro
 % original image
-image = im2double(imread('test/IMG_3822.JPG'));
+image = im2double(imread('test/0024.JPG'));
 figure(1), NFIGURE = NFIGURE + 1;
 subplot(NROWS, NCOLUMNS, NFIGURE), imshow(image), title("Original image");
 
@@ -60,7 +60,7 @@ for i = 1 : n_labels
     ROI(:, :, 3) = objectB(topRow:bottomRow, leftColumn:rightColumn);
     
     % individual ROI
-    %figure, imshow(ROI), title("ROI");
+    figure, imshow(ROI), title("ROI");
     
     % macro classification
     object_label = macro_classification(ROI);

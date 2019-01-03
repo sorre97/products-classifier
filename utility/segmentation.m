@@ -52,7 +52,13 @@ NCOLUMNS = 3;
     
     % adding edges to better delimit objects
     BW = BW | edge2;
+    
+    %PROVA
     %BW = padarray(BW, [3 3], 0, 'both');
+    BW2 = zeros(size(BW));
+    BW2(3: 468, 3: 671) = BW(3: 468, 3: 671);
+    BW = BW2;
+    
     subplot(NROWS, NCOLUMNS, 3), imshow(BW), title("BW edge");
     
     

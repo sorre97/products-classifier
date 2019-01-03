@@ -16,7 +16,6 @@ tic
     
     % calculate hu descriptors
     CEDD = [CEDD; compute_CEDD(im)];
-    
   end
      
   %% saving workspace
