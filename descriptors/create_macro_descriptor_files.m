@@ -1,4 +1,5 @@
 function create_macro_descriptor_files()
+tic
   %% importing file list and labels
   [images, labels] = readlists();
   
@@ -6,6 +7,7 @@ function create_macro_descriptor_files()
   
   % feature vector
   CEDD = [];
+  hu = [];
     
   %% feature extraction
   for n = 1 : nimages
@@ -20,4 +22,5 @@ function create_macro_descriptor_files()
   %% saving workspace
   save('descriptors/descriptors.mat', 'images', 'labels', 'CEDD');
 
+  toc
 end

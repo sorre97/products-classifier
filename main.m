@@ -7,7 +7,7 @@ NFIGURE = 0;
 
 %% intro
 % original image
-image = im2double(imread('test/0024.JPG'));
+image = im2double(imread('test/IMG_3822.JPG'));
 figure(1), NFIGURE = NFIGURE + 1;
 subplot(NROWS, NCOLUMNS, NFIGURE), imshow(image), title("Original image");
 
