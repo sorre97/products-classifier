@@ -2,7 +2,7 @@
 d = uigetdir(pwd, 'tmp');
 files = dir(fullfile(d, '*.JPG'));
 
-COUNTER = 306;
+COUNTER = 442;
 for i = 1 : numel(files)
    image = files(i);
    im = imread([image.folder '/' image.name]);
