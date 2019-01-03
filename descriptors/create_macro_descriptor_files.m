@@ -5,19 +5,19 @@ function create_macro_descriptor_files()
   nimages = numel(images);
   
   % feature vector
-  hu = [];
+  CEDD = [];
     
   %% feature extraction
   for n = 1 : nimages
     % reading image
-    im = rgb2gray(im2double(imread(['dataset/' images{n}])));
+    im = imread(['dataset/' images{n}]);
     
     % calculate hu descriptors
-    hu = [hu; compute_hu_moments(im)];
+    CEDD = [CEDD; compute_CEDD(im)];
     
   end
      
   %% saving workspace
-  save('descriptors/descriptors.mat', 'images', 'labels', 'hu');
+  save('descriptors/descriptors.mat', 'images', 'labels', 'CEDD');
 
 end

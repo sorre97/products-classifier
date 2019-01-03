@@ -11,11 +11,11 @@ function object_label = macro_classification(ROI)
 %
 %
 
-hu = compute_hu_moments(rgb2gray(ROI));
+CEDD = compute_CEDD(im2uint8(ROI));
 
 
-%%IMPORT CLASSIFIER
+% IMPORT CLASSIFIER
 CompactMdl = loadCompactModel('classificators/macroClassificationKNN.mat');
-object_label = predict(CompactMdl, hu); 
+object_label = predict(CompactMdl, CEDD); 
 end
 %------------- END OF CODE --------------

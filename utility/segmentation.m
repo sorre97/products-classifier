@@ -67,8 +67,8 @@ NCOLUMNS = 3;
     SE = strel('disk', 3);
 
     % dilatation to close object borders
-    morph = bwareaopen(BW, 4000);
-    morph = imdilate(morph, SE);
+    %morph = bwareaopen(BW, 4000);
+    morph = imdilate(BW, SE);
     subplot(NROWS, NCOLUMNS, 4), imshow(morph), title("Morph dilatation");
     
     % hole filling
