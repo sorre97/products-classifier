@@ -31,7 +31,7 @@ cen_mmt =0;
 for i=1:1:size(mask,1)
     for j=1:1:size(mask,2)
         if mask(i,j) == 1
-            cen_mmt = cen_mmt + (double(image(i,j))*((i-x_cen)^p)*((j-y_cen)^q)); %calculating central moment
+            cen_mmt = cen_mmt + (double(image(i,j))*((i-x_cen-1)^p)*((j-y_cen-1)^q)); %calculating central moment
         end
     end
 end

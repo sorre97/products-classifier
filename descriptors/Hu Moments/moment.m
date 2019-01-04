@@ -20,7 +20,7 @@ m=0;
 for i=1:1:size(mask,1)
     for j=1:1:size(mask,2)
         if mask(i,j) == 1
-            m = m + (double((image(i,j))*(i^p)*(j^q))) ; %moment calculation
+            m = m + (double((image(i,j))*((i-1)^p)*((j-1)^q))); %moment calculation
         end
     end
 end

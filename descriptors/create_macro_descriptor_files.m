@@ -8,17 +8,21 @@ tic
   % feature vector
   %CEDD = [];
   hu = [];
+  %qhist = [];
+  %lbp = [];
     
   %% feature extraction
   for n = 1 : nimages
     % reading image
-    im = rgb2gray(im2double(imread(['dataset/' images{n}])));
+    im = imread(['dataset/' images{n}]);
     
-    fprintf("%d\n", n);
+    %fprintf("%d\n", n);
     
     % calculate hu descriptors
-    hu = [hu; Hu_Moments(SI_Moment(im))];
+    hu = [hu; Hu_Moments(SI_Moment(rgb2gray(im2double(im))))];
     %CEDD = [CEDD; compute_CEDD(im)];
+    %qhist = [qhist; compute_qhist(im)];
+    %lbp = [lbp; compute_lbp(rgb2gray(im))];
   end
      
   %% saving workspace
