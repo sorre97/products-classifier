@@ -14,9 +14,9 @@ tic
   %% feature extraction
   for n = 1 : nimages
     % reading image
-    im = imread(['dataset/' images{n}]);
+    im = imread(['dataset2/' images{n}]);
     
-    %fprintf("%d\n", n);
+    fprintf("%d\n", n);
     
     % calculate hu descriptors
     hu = [hu; Hu_Moments(SI_Moment(rgb2gray(im2double(im))))];
