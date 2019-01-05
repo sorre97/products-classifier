@@ -14,7 +14,7 @@ tic
   %% feature extraction
   for n = 1 : nimages
     % reading image
-    im = imread(['dataset2/' images{n}]);
+    im = imread(['dataset/' images{n}]);
     
     fprintf("%d\n", n);
     
