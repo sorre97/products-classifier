@@ -7,7 +7,7 @@ NFIGURE = 0;
 
 %% intro
 % original image
-image = im2double(imread('test/0001.JPG'));
+image = im2double(imread('test/0020.JPG'));
 figure(1), NFIGURE = NFIGURE + 1;
 subplot(NROWS, NCOLUMNS, NFIGURE), imshow(image), title("Original image");
 
@@ -95,4 +95,6 @@ switch answer
         figure(1), NFIGURE = NFIGURE + 1;
         subplot(NROWS, NCOLUMNS, NFIGURE), imshow(labelled_image), title("Bounding box image");
         drawBoundingBox(BW);
+        figure,
+        imshow(labelled_image);
 end

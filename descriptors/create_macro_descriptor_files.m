@@ -6,8 +6,8 @@ tic
   nimages = numel(images);
   
   % feature vector
-  %CEDD = [];
-  hu = [];
+  CEDD = [];
+  % hu = [];
   %qhist = [];
   %lbp = [];
     
@@ -19,14 +19,14 @@ tic
     fprintf("%d\n", n);
     
     % calculate hu descriptors
-    hu = [hu; Hu_Moments(SI_Moment(rgb2gray(im2double(im))))];
-    %CEDD = [CEDD; compute_CEDD(im)];
+    % hu = [hu; Hu_Moments(SI_Moment(rgb2gray(im2double(im))))];
+    CEDD = [CEDD; compute_CEDD(im)];
     %qhist = [qhist; compute_qhist(im)];
     %lbp = [lbp; compute_lbp(rgb2gray(im))];
   end
      
   %% saving workspace
-  save('descriptors/descriptors.mat', 'images', 'labels', 'hu');
+  save('descriptors/descriptors.mat', 'images', 'labels', 'CEDD');
 
   toc
 end

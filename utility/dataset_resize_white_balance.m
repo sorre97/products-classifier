@@ -2,9 +2,9 @@
 d = uigetdir(pwd, 'tmp');
 files = dir(fullfile(d, '*.JPG'));
 
-COUNTER = 1;
+COUNTER = 1851;
 %END = numel(files);
-END = 850;
+END = 1967;
 SCALE = 0.25;
 
 for i = 1 : END
