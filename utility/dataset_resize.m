@@ -2,7 +2,7 @@
 d = uigetdir(pwd, 'tmp');
 files = dir(fullfile(d, '*.JPG'));
 
-COUNTER = 101;
+COUNTER = 1;
 END = numel(files);
 SCALE = 0.25;
 
@@ -10,7 +10,8 @@ for i = 1 : END
    image = files(i);
    im = imread([image.folder '/' image.name]);
    %imw = white_balance(im);
-   imw = imresize(im, SCALE);
+   %imw = imresize(im, SCALE);
+   imw = rgb2gray(im);
    if(COUNTER < 10)
        filename = ['000' num2str(COUNTER)];
    elseif(COUNTER < 100)

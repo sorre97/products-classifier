@@ -16,9 +16,14 @@ CEDD = compute_CEDD(im2uint8(ROI));
 qhist = compute_qhist(im2uint8(ROI));
 %lbp = compute_lbp(im2uint8(rgb2gray(ROI)));
     
-
+%figure, imshow(ROI);
 % IMPORT CLASSIFIER
 CompactMdl = loadCompactModel('classificators/macroClassificationKNN.mat');
 object_label = predict(CompactMdl, [CEDD qhist]); 
+
+%SURF
+%load('classificators/SURFClassifier.mat');
+%[labelIdx, score] = predict(classifier, rgb2gray(im2uint8(ROI)));
+%object_label = classifier.Labels(labelIdx);
 end
 %------------- END OF CODE --------------

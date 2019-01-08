@@ -1,5 +1,4 @@
 function create_macro_descriptor_files()
-tic
   %% importing file list and labels
   [images, labels] = readlists();
   
@@ -14,7 +13,7 @@ tic
   %% feature extraction
   for n = 1 : nimages
     % reading image
-    im = imread(['dataset/' images{n}]);
+    im = imread(['dataset2/' images{n}]);
     
     fprintf("%d\n", n);
     
@@ -32,5 +31,4 @@ tic
   %% saving workspace
   save('descriptors/descriptors.mat', 'images', 'labels', 'CEDD', 'qhist');
 
-  toc
 end
