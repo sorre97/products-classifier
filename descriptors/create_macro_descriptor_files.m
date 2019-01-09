@@ -6,21 +6,21 @@ function create_macro_descriptor_files()
   
   % feature vector
   CEDD = [];
-  %hu = [];
+  hu = [];
   qhist = [];
-  %lbp = [];
+  lbp = [];
     
   %% feature extraction
   for n = 1 : nimages
     % reading image
-    im = imread(['dataset2/' images{n}]);
+    im = imread(['dataset/' images{n}]);
     
     fprintf("%d\n", n);
     
     % calculate hu descriptors
     %hu = [hu; Hu_Moments(SI_Moment(rgb2gray(im2double(im))))];
     CEDD = [CEDD; compute_CEDD(im)];
-    qhist = [qhist; compute_qhist(im)];
+    %qhist = [qhist; compute_qhist(im)];
     %lbp = [lbp; compute_lbp(rgb2gray(im))];
     
     %SURF
@@ -29,6 +29,6 @@ function create_macro_descriptor_files()
   end
      
   %% saving workspace
-  save('descriptors/descriptors.mat', 'images', 'labels', 'CEDD', 'qhist');
+  save('descriptors/descriptors.mat', 'images', 'labels', 'CEDD');
 
 end

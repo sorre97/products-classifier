@@ -1,4 +1,4 @@
-function segmentated_image = segmentation(image)
+function segmentated_image = segmentation(image, print)
 %segmentation - segmentation of image
 %
 %
@@ -10,10 +10,15 @@ function segmentated_image = segmentation(image)
 %
 %
 %------------- BEGIN CODE --------------
-NROWS = 3;
-NCOLUMNS = 3;
-    
+if(exist('print', 'var') && strcmp(print, 'verbose'))
+    verbose = true;
+    NROWS = 3;
+    NCOLUMNS = 3;
     figure(2)
+else
+    verbose = false;
+end
+
     img = rgb2gray(image);
     
     %% Binarization
@@ -42,12 +47,16 @@ NCOLUMNS = 3;
     BW = imbinarize(im3);
     % removing small imperfections from binarization
     BW = bwareaopen(BW,50);
-    subplot(NROWS, NCOLUMNS, 1), imshow(BW), title("Binarized image");
+    if(verbose)
+        subplot(NROWS, NCOLUMNS, 1), imshow(BW), title("Binarized image");
+    end
     
     %% Edge
     % Edge extraction using Canny method
     edge2 = edge(img, 'Canny', 0.1);
-    subplot(NROWS, NCOLUMNS, 2), imshow(edge2), title("Edges");
+    if(verbose)
+        subplot(NROWS, NCOLUMNS, 2), imshow(edge2), title("Edges");
+    end
     
     
     % adding edges to better delimit objects
@@ -58,8 +67,9 @@ NCOLUMNS = 3;
     BW2 = zeros(BWsize);
     BW2(3: BWsize(1) - 12, 3: BWsize(2) - 49) = BW(3: BWsize(1) - 12, 3: BWsize(2) - 49);
     BW = BW2;
-    
-    subplot(NROWS, NCOLUMNS, 3), imshow(BW), title("BW edge");
+    if(verbose)
+        subplot(NROWS, NCOLUMNS, 3), imshow(BW), title("BW edge");
+    end
     
     
     %% morphology
@@ -75,15 +85,21 @@ NCOLUMNS = 3;
     % dilatation to close object borders
     %morph = bwareaopen(BW, 4000);
     morph = imdilate(BW, SE);
-    subplot(NROWS, NCOLUMNS, 4), imshow(morph), title("Morph dilatation");
+    if(verbose)
+        subplot(NROWS, NCOLUMNS, 4), imshow(morph), title("Morph dilatation");
+    end
     
     % hole filling
     morph = imfill(morph, 'holes');
-    subplot(NROWS, NCOLUMNS, 5), imshow(morph), title("Morph holes");
+    if(verbose)
+        subplot(NROWS, NCOLUMNS, 5), imshow(morph), title("Morph holes");
+    end
     
     % opening to filter small imperfections from dilatation
     morph = bwareaopen(morph, 2000);
-    subplot(NROWS, NCOLUMNS, 6), imshow(morph), title("Morph opening");
+    if(verbose)
+        subplot(NROWS, NCOLUMNS, 6), imshow(morph), title("Morph opening");
+    end
     
     % paper line filtering with erosion
     % touching objects handling
@@ -92,7 +108,9 @@ NCOLUMNS = 3;
     morph = imerode(morph, SE);
     morph = imerode(morph, SE);
     morph = imerode(morph, SE);
-    subplot(NROWS, NCOLUMNS, 7), imshow(morph), title("Morph erosion");
+    if(verbose)
+        subplot(NROWS, NCOLUMNS, 7), imshow(morph), title("Morph erosion");
+    end
     
     %% end
     segmentated_image = morph;

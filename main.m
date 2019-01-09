@@ -7,8 +7,7 @@ NFIGURE = 0;
 
 %% intro
 % original image
-image = im2double(imread('test/0046.JPG'));
-image = imresize(image, 1.5);
+image = im2double(imread('test/0020.JPG'));
 figure(1), NFIGURE = NFIGURE + 1;
 subplot(NROWS, NCOLUMNS, NFIGURE), imshow(image), title("Original image");
 
@@ -19,7 +18,7 @@ subplot(NROWS, NCOLUMNS, NFIGURE), imshow(im), title("White balanced image");
 
 %% binarization
 im = imfilter(im, fspecial('average')); %smoothing
-BW = segmentation(im);
+BW = segmentation(im, 'verbose');
 figure(1), NFIGURE = NFIGURE + 1;
 subplot(NROWS, NCOLUMNS, NFIGURE), imshow(BW), title("Segmentated image");
 
@@ -79,9 +78,7 @@ for i = 1 : n_labels
 %% sub classification
 %     if (object_label == 'drinks')
 %         object_label = drink_classification(ROI);
-%     end
-    
-    
+%     end 
 end
 
 
