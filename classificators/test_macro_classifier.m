@@ -13,7 +13,7 @@ function out = test_macro_classifier(descriptors, labels, cv)
   
   % classificator training
   c = fitcknn(train_values, train_labels, 'NumNeighbors', 5, 'Distance','euclidean',...
-     'DistanceWeight', 'squaredinverse', 'Standardize', 1);
+     'DistanceWeight', 'equal', 'Standardize', 0);
   %c = fitctree(train_values, train_labels);
   
   train_predicted = predict(c, train_values);

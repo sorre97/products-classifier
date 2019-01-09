@@ -20,7 +20,7 @@ function create_macro_descriptor_files()
     % calculate hu descriptors
     %hu = [hu; Hu_Moments(SI_Moment(rgb2gray(im2double(im))))];
     CEDD = [CEDD; compute_CEDD(im)];
-    %qhist = [qhist; compute_qhist(im)];
+    qhist = [qhist; compute_qhist(im)];
     %lbp = [lbp; compute_lbp(rgb2gray(im))];
     
     %SURF
@@ -29,6 +29,6 @@ function create_macro_descriptor_files()
   end
      
   %% saving workspace
-  save('descriptors/descriptors.mat', 'images', 'labels', 'CEDD');
+  save('descriptors/descriptors.mat', 'images', 'labels', 'CEDD', 'qhiste);
 
 end

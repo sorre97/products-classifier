@@ -5,7 +5,7 @@ close all
 d = uigetdir(pwd, 'tmp');
 files = dir(fullfile(d, '*.JPG'));
 
-COUNTER = 292;
+COUNTER = 1;
 END = numel(files);
 SCALE = 0.25;
 
@@ -53,6 +53,6 @@ for i = 1 : END
    
    COUNTER = COUNTER + 1;
    
-   imwrite(ROI, [ 'dataset/' filename '.JPG']);
-   %imwrite(im, [ 'dataset/' filename '.JPG']);
+   %imwrite(ROI, [ 'dataset/' filename '.JPG']);
+   imwrite(im, [ 'dataset/' filename '.JPG']);
 end
