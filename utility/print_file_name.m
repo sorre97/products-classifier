@@ -1,5 +1,5 @@
-COUNTER = 292;
-END = 423;
+COUNTER = 239;
+END = 339;
 for i = COUNTER : END
     
    if(COUNTER < 10)

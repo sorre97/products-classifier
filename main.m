@@ -7,7 +7,7 @@ NFIGURE = 0;
 
 %% intro
 % original image
-image = im2double(imread('test/0044.JPG'));
+image = im2double(imread('test/0054.JPG'));
 figure(1), NFIGURE = NFIGURE + 1;
 subplot(NROWS, NCOLUMNS, NFIGURE), imshow(image), title("Original image");
 
@@ -17,7 +17,8 @@ figure(1), NFIGURE = NFIGURE + 1;
 subplot(NROWS, NCOLUMNS, NFIGURE), imshow(im), title("White balanced image");
 
 %% binarization
-im = imfilter(im, fspecial('average')); %smoothing
+%im = imfilter(im, fspecial('average')); %smoothing
+im = imgaussfilt(im);
 BW = segmentation(im, 'verbose');
 figure(1), NFIGURE = NFIGURE + 1;
 subplot(NROWS, NCOLUMNS, NFIGURE), imshow(BW), title("Segmentated image");

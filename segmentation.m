@@ -112,6 +112,13 @@ end
         subplot(NROWS, NCOLUMNS, 7), imshow(morph), title("Morph erosion");
     end
     
+    morph = imdilate(morph, SE);
+    morph = imdilate(morph, SE);
+    morph = imdilate(morph, SE);
+    if(verbose)
+        subplot(NROWS, NCOLUMNS, 8), imshow(morph), title("Morph dilatation");
+    end
+    
     %% end
     segmentated_image = morph;
 %------------- END OF CODE --------------
