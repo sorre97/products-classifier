@@ -14,6 +14,7 @@ function create_macro_descriptor_files()
   for n = 1 : nimages
     % reading image
     im = imread(['dataset/' images{n}]);
+    im = imgaussfilt(im);
     
     fprintf("%d\n", n);
     

@@ -29,6 +29,7 @@ hu_STD = std2(hu);
 hu_MEAN = mean2(hu);
 hu = (hu - hu_MEAN) / hu_STD;
 
+figure, imshow(ROI);
 %% classification
 % importing classifier
 CompactMdl = loadCompactModel('classificators/macroClassificationKNN.mat');
