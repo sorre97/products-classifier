@@ -13,9 +13,12 @@ function object_label = macro_classification(ROI)
 
 %% feature extraction
 CEDD = compute_CEDD(im2uint8(ROI));
-hu = Hu_Moments(SI_Moment(rgb2gray(im2uint8(ROI))));
+%hu = Hu_Moments(SI_Moment(rgb2gray(im2uint8(ROI))));
 %qhist = compute_qhist(im2uint8(ROI));
 %lbp = compute_lbp(im2uint8(rgb2gray(ROI)));
+%ghist = compute_glcm(im2uint8(rgb2gray(ROI)));
+%glcm = compute_ghist(im2uint8(rgb2gray(ROI)));
+%colorRGB = compute_average_color(im2uint8(ROI));
     
 %figure, imshow(ROI);
 
@@ -25,22 +28,30 @@ CEDD_MEAN = mean2(CEDD);
 CEDD = (CEDD - CEDD_MEAN) / CEDD_STD;
   
 
-hu_STD = std2(hu);
-hu_MEAN = mean2(hu);
-hu = (hu - hu_MEAN) / hu_STD;
+%hu_STD = std2(hu);
+%hu_MEAN = mean2(hu);
+%hu = (hu - hu_MEAN) / hu_STD;
 
-figure, imshow(ROI);
+
+%qhist_STD = std2(qhist);
+%qhist_MEAN = mean2(qhist);
+%qhist = (qhist - qhist_MEAN) / qhist_STD;
+
+%colorRGB_STD = std2(colorRGB);
+%colorRGB_MEAN = mean2(colorRGB);
+%colorRGB = (colorRGB - colorRGB_MEAN) / colorRGB_STD;
+ 
 %% classification
 % importing classifier
 CompactMdl = loadCompactModel('classificators/macroClassificationKNN.mat');
 % classification
-[object_label, prob] = predict(CompactMdl, [CEDD hu]); 
+[object_label, prob] = predict(CompactMdl, [CEDD]); 
 
 %% unknown class
 % printing confidence of recognition for each class
 g=sprintf('%.8f ', prob);
 fprintf('Confidence probability:\n');
-fprintf("%10s%10s%10s%10s%10s%10s\n", "chocolate", "drink", "fruit", "icecream", "pasta", "yogurt");
+fprintf("%10s%10s%10s%10s%10s%10s%10s%10s\n", "algida", "drink", "cocacola", "limone", "apple", "pasta", "yogurt", "integrale");
 fprintf('%s - %s\n', g, char(object_label));
 
 % if probability of recognition is below treshold T, the object is not recognized

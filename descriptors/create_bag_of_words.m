@@ -3,7 +3,7 @@ function create_bag_of_words()
     %setDir  = fullfile(d);
 
     % dataset location
-    setDir = './dataset';
+    setDir = './dataset2';
 
     % storing files and labels in imageDataStore object
     imds = imageDatastore(setDir,'IncludeSubfolders',true,'LabelSource',...

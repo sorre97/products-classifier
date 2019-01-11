@@ -53,8 +53,8 @@ end
     
     %% Edge
     % Edge extraction using Canny method
-    %edge2 = edge(img, 'Canny', 0.1);
-    edge2 = edge(img, 'Canny', 0.05);
+    edge2 = edge(img, 'Canny', 0.1);
+    %edge2 = edge(img, 'Canny', 0.05);
     if(verbose)
         subplot(NROWS, NCOLUMNS, 2), imshow(edge2), title("Edges");
     end

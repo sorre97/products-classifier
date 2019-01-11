@@ -1,6 +1,6 @@
-im = imread('dataset/0508.JPG');
+im = imread('dataset/0094.JPG');
 
-COUNTER = 508;
+COUNTER = 580;
 
 for angle = 5 : 5 : 360 
     imr = imrotate(im, angle);
