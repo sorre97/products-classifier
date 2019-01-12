@@ -1,6 +1,6 @@
 load('descriptors/descriptors.mat');
 
-descriptor_vector = [CEDD];
+descriptor_vector = [compactness hu CEDD qhist];
 %% feature incorrelation
 Y=tsne(descriptor_vector);
 gscatter(Y(:,1),Y(:,2),labels);
