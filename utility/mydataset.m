@@ -5,11 +5,11 @@ close all
 d = uigetdir(pwd, 'tmp');
 files = dir(fullfile(d, '*.JPG'));
 
-COUNTER = 541;
+COUNTER = 616;
 END = numel(files);
 SCALE = 0.25;
 
-for i = 1 : 3
+for i = 1 : END
    image = files(i);
    im = im2double(imread([image.folder '/' image.name]));
    
@@ -39,8 +39,9 @@ for i = 1 : 3
    %figure(1), imshow(ROI);
    
    %imw = imresize(im, SCALE);
-   %imw = rgb2gray(im);
-   im = imresize(im, 0.125);
+   %imw = rgb2gray(im); 
+   
+   ROI = imresize(ROI, SCALE);
    
    if(COUNTER < 10)
        filename = ['000' num2str(COUNTER)];
@@ -54,6 +55,6 @@ for i = 1 : 3
    
    COUNTER = COUNTER + 1;
    
-   %imwrite(ROI, [ 'dataset/' filename '.JPG']);
-   imwrite(im, [ 'dataset/' filename '.JPG']);
+   imwrite(ROI, [ 'dataset/' filename '.JPG']);
+   %imwrite(im, [ 'dataset/' filename '.JPG']);
 end

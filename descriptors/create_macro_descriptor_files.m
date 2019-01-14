@@ -18,6 +18,8 @@ function create_macro_descriptor_files()
     % reading image
     im = imread(['dataset/' images{n}]);
     
+    fprintf("%d\n", n);
+    
     hu = [hu; Hu_Moments(SI_Moment(rgb2gray(im)))];
     CEDD = [CEDD; compute_CEDD(im)];
     qhist = [qhist; compute_qhist(im)];
@@ -46,6 +48,6 @@ function create_macro_descriptor_files()
   
   
   %% saving workspace
-  save('descriptors/descriptors.mat', 'images', 'labels', 'compactness', 'CEDD', 'hu', 'qhist');
+  save('descriptors/descriptors.mat', 'images', 'labels', 'CEDD', 'hu', 'qhist');
 
 end
