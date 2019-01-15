@@ -12,21 +12,25 @@ function create_macro_descriptor_files()
   ghist = [];
   glcm = [];
   colorRGB = [];
+  compactness = [];
     
   %% feature extraction
   for n = 1 : nimages
     % reading image
     im = imread(['dataset/' images{n}]);
+    % binary of imread
+    BW = rgb2gray(im) > 0;
     
     fprintf("%d\n", n);
     
-    hu = [hu; Hu_Moments(SI_Moment(rgb2gray(im)))];
+    hu = [hu; Hu_Moments(SI_Moment(BW))];
     CEDD = [CEDD; compute_CEDD(im)];
     qhist = [qhist; compute_qhist(im)];
     %lbp = [lbp; compute_lbp(rgb2gray(im))];    
     %ghist = [ghist; compute_glcm(rgb2gray(im))];
     %glcm = [glcm; compute_ghist(rgb2gray(im))];
     %colorRGB = [colorRGB; compute_average_color(im)];
+    compactness = [compactness; compute_compactness(BW)];
     
     %SURF
     %points = detectSURFFeatures(rgb2gray(im));
@@ -46,8 +50,12 @@ function create_macro_descriptor_files()
   qhist_MEAN = mean2(qhist);
   qhist = (qhist - qhist_MEAN) / qhist_STD;
   
+  compactness_STD = std2(compactness);
+  compactness_MEAN = mean2(compactness);
+  compactness = (compactness - compactness_MEAN) / compactness_STD;
+  
   
   %% saving workspace
-  save('descriptors/descriptors.mat', 'images', 'labels', 'CEDD', 'hu', 'qhist');
+  save('descriptors/descriptors.mat', 'images', 'labels', 'CEDD', 'hu', 'qhist', 'compactness');
 
 end
