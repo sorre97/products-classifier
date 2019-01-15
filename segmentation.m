@@ -120,6 +120,29 @@ end
         subplot(NROWS, NCOLUMNS, 8), imshow(morph), title("Morph dilatation");
     end
     
+    %% separating touching objects
+    
+    % calculating euclidean distance of not morph
+    D = -bwdist(imcomplement(morph));
+    
+    % applying a mask based on extended minima transform
+    % (increment the second parameter to avoid the segmentation 
+    % between the object)
+    mask = imextendedmin(D,15);
+    
+    % modifying distance image so it only has regional minima 
+    % wherever binary marker image BW is nonzero. (?)
+    D2 = imimposemin(D,mask);
+    
+    % applying watershed transform in order to segment the image
+    Ld2 = watershed(D2);
+    finalImage = morph;
+    finalImage(Ld2 == 0) = 0;
+    
+    if(verbose)
+        subplot(NROWS, NCOLUMNS, 9), imshow(finalImage), title("Separating touching objects");
+    end
+    
     %% end
-    segmentated_image = morph;
+    segmentated_image = finalImage;
 %------------- END OF CODE --------------
