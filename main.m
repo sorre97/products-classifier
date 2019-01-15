@@ -7,7 +7,7 @@ NFIGURE = 0;
 
 %% intro
 % original image
-image = im2double(imread('test/0026 (SKIP FOR NOW - TOUCHING OBJECTS).JPG'));
+image = im2double(imread('test/0113.JPG'));
 figure(1), NFIGURE = NFIGURE + 1;
 subplot(NROWS, NCOLUMNS, NFIGURE), imshow(image), title("Original image");
 
@@ -76,11 +76,6 @@ for i = 1 : n_labels
         'FontSize', 20, 'BoxColor', 'white', 'AnchorPoint', 'Center');
     figure(1),
     subplot(NROWS, NCOLUMNS, NFIGURE), imshow(labelled_image), title('Labelled image');
-    
-%% sub classification
-%     if (object_label == 'drinks')
-%         object_label = drink_classification(ROI);
-%     end 
 end
 
 

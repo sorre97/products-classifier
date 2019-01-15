@@ -124,11 +124,13 @@ end
     
     % calculating euclidean distance of not morph
     D = -bwdist(imcomplement(morph));
+    %figure, imshow(D,[]);
     
     % applying a mask based on extended minima transform
     % (increment the second parameter to avoid the segmentation 
     % between the object)
     mask = imextendedmin(D,15);
+    %figure, imshow(mask);
     
     % modifying distance image so it only has regional minima 
     % wherever binary marker image BW is nonzero. (?)
@@ -136,6 +138,7 @@ end
     
     % applying watershed transform in order to segment the image
     Ld2 = watershed(D2);
+    %figure, imshow(label2rgb(Ld2));
     finalImage = morph;
     finalImage(Ld2 == 0) = 0;
     
