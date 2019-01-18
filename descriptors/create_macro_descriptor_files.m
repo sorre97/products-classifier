@@ -18,9 +18,9 @@ function create_macro_descriptor_files()
   for n = 1 : nimages
     % reading image
     im = imread(['dataset/' images{n}]);
+    
     % binary of imread
     BW = rgb2gray(im) > 0;
-    
     fprintf("%d\n", n);
     
     hu = [hu; Hu_Moments(SI_Moment(BW))];
