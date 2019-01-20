@@ -12,3 +12,5 @@ Lista:
 - Ghiaccioli
 - Milka
 - Yogurt Vivaverde
+- Tonno
+- TODO -> passata CIRO
