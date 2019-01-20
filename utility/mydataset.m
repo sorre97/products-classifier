@@ -5,7 +5,7 @@ close all
 d = uigetdir(pwd, 'tmp');
 files = dir(fullfile(d, '*.JPG'));
 
-COUNTER = 903;
+COUNTER = 999;
 END = numel(files);
 SCALE = 0.25;
 

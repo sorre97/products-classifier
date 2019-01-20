@@ -7,15 +7,13 @@ NFIGURE = 0;
 
 %% intro
 % original image
-image = im2double(imread('test/0145.JPG'));
-image = imresize(image, 0.37);
+image = im2double(imread('test/0164.JPG'));
 figure(1), NFIGURE = NFIGURE + 1;
 subplot(NROWS, NCOLUMNS, NFIGURE), imshow(image), title("Original image");
 
 %% white balancing
 %im = white_balance(image);
 im = image;
-%im = image;
 %im(:, :, 1) = imadjust(im(:, :, 1));
 %im(:, :, 2) = imadjust(im(:, :, 2));
 %im(:, :, 3) = imadjust(im(:, :, 3));

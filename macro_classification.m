@@ -13,7 +13,7 @@ function object_label = macro_classification(ROI)
 
 %% feature extraction
 
-BWROI = rgb2gray(im2uint8(ROI)) > 0;
+BWROI = imfill(rgb2gray(im2uint8(ROI)) > 0, 'holes');
 
 CEDD = compute_CEDD(im2uint8(ROI));
 hu = Hu_Moments(SI_Moment(BWROI));

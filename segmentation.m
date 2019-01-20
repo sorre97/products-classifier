@@ -66,7 +66,7 @@ end
     % removing borders to avoid edge on corners
     BWsize = size(BW);
     BW2 = zeros(BWsize);
-    BW2(3: BWsize(1) - 12, 3: BWsize(2) - 49) = BW(3: BWsize(1) - 12, 3: BWsize(2) - 49);
+    BW2(3: BWsize(1) - 3, 3: BWsize(2) - 3) = BW(3: BWsize(1) - 3, 3: BWsize(2) - 3);
     BW = BW2;
     if(verbose)
         subplot(NROWS, NCOLUMNS, 3), imshow(BW), title("BW edge");
@@ -97,7 +97,7 @@ end
     end
     
     % opening to filter small imperfections from dilatation
-    morph = bwareaopen(morph, 2000);
+    morph = bwareaopen(morph, 1000);
     if(verbose)
         subplot(NROWS, NCOLUMNS, 6), imshow(morph), title("Morph opening");
     end
@@ -109,6 +109,7 @@ end
     morph = imerode(morph, SE);
     morph = imerode(morph, SE);
     morph = imerode(morph, SE);
+    
     if(verbose)
         subplot(NROWS, NCOLUMNS, 7), imshow(morph), title("Morph erosion");
     end

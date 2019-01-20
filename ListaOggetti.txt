@@ -10,3 +10,5 @@ Lista:
 - Aranciata
 - Sprite
 - Ghiaccioli
+- Milka
+- Yogurt Vivaverde

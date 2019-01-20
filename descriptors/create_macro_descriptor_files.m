@@ -57,5 +57,5 @@ function create_macro_descriptor_files()
   
   %% saving workspace
   save('descriptors/descriptors.mat', 'images', 'labels', 'CEDD', 'hu', 'qhist', 'compactness');
-
+  
 end
