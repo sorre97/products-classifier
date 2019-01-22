@@ -1,6 +1,6 @@
 load('descriptors/descriptors.mat');
 
-descriptor_vector = [hu compactness CEDD qhist];
+descriptor_vector = [hu compactness CEDD];
 
 %% feature incorrelation
 Y=tsne(descriptor_vector);

@@ -12,7 +12,6 @@ function object_label = macro_classification(ROI)
 %
 
 %% feature extraction
-
 BWROI = imfill(rgb2gray(im2uint8(ROI)) > 0, 'holes');
 
 CEDD = compute_CEDD(im2uint8(ROI));
@@ -46,7 +45,7 @@ qhist = (qhist - qhist_MEAN) / qhist_STD;
 % importing classifier
 CompactMdl = loadCompactModel('classificators/macroClassificationKNN.mat');
 % classification
-[object_label, prob] = predict(CompactMdl, [hu compactness CEDD qhist]);
+[object_label, prob] = predict(CompactMdl, [hu compactness CEDD]);
 
 %% unknown class
 % printing confidence of recognition for each class

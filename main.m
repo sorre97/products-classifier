@@ -7,16 +7,16 @@ NFIGURE = 0;
 
 %% intro
 % original image
-image = im2double(imread('test/0168.JPG'));
+image = im2double(imread('test/0162.JPG'));
 figure(1), NFIGURE = NFIGURE + 1;
 subplot(NROWS, NCOLUMNS, NFIGURE), imshow(image), title("Original image");
 
 %% white balancing
-%im = white_balance(image);
-im = image;
-%im(:, :, 1) = imadjust(im(:, :, 1));
-%im(:, :, 2) = imadjust(im(:, :, 2));
-%im(:, :, 3) = imadjust(im(:, :, 3));
+im = white_balance(image);
+%im = image;
+% im(:, :, 1) = imadjust(im(:, :, 1));
+% im(:, :, 2) = imadjust(im(:, :, 2));
+% im(:, :, 3) = imadjust(im(:, :, 3));
 figure(1), NFIGURE = NFIGURE + 1;
 subplot(NROWS, NCOLUMNS, NFIGURE), imshow(im), title("White balanced image");
 
@@ -65,8 +65,14 @@ for i = 1 : n_labels
     ROI(:, :, 3) = objectB(topRow:bottomRow, leftColumn:rightColumn);
     
     % individual ROI
-    %figure, imshow(ROI), title("ROI");
+    % figure, imshow(ROI), title("ROI");
     
+    % equalizing v channel of ROIHsv, then bringing it back to
+    % RGB space
+    ROIHSV = rgb2hsv(ROI);
+    ROIHSV(:, :, 3) = imadjust(ROIHSV(:, :, 3));
+    ROI = hsv2rgb(ROIHSV);
+
     % macro classification
     object_label = macro_classification(ROI);
     
