@@ -8,11 +8,8 @@ function create_macro_descriptor_files()
   CEDD = [];
   hu = [];
   qhist = [];
-  lbp = [];
-  ghist = [];
-  glcm = [];
-  colorRGB = [];
   compactness = [];
+  color = [];
     
   %% feature extraction
   for n = 1 : nimages
@@ -21,20 +18,20 @@ function create_macro_descriptor_files()
     
     % binary of imread
     BW = rgb2gray(im) > 0;
+    
+    % color equalization throw V channel of HSV color space
+    HSV = rgb2hsv(im);
+    HSV(:, :, 3) = imadjust(HSV(:, :, 3));
+    im = hsv2rgb(HSV);
+    
     fprintf("%d\n", n);
     
     hu = [hu; Hu_Moments(SI_Moment(BW))];
-    CEDD = [CEDD; compute_CEDD(im)];
-    qhist = [qhist; compute_qhist(im)];
-    %lbp = [lbp; compute_lbp(rgb2gray(im))];    
-    %ghist = [ghist; compute_glcm(rgb2gray(im))];
-    %glcm = [glcm; compute_ghist(rgb2gray(im))];
-    %colorRGB = [colorRGB; compute_average_color(im)];
+    CEDD = [CEDD; compute_CEDD(im2uint8(im))];
+    %qhist = [qhist; compute_qhist(im)];
     compactness = [compactness; compute_compactness(BW)];
+    color = [color; compute_average_color(HSV)];
     
-    %SURF
-    %points = detectSURFFeatures(rgb2gray(im));
-    %[features, valid_points] = extractFeatures(rgb2gray(im), points);
   end
   
   % feature normalization
@@ -46,16 +43,20 @@ function create_macro_descriptor_files()
   hu_MEAN = mean2(hu);
   hu = (hu - hu_MEAN) / hu_STD;
   
-  qhist_STD = std2(qhist);
-  qhist_MEAN = mean2(qhist);
-  qhist = (qhist - qhist_MEAN) / qhist_STD;
+  %qhist_STD = std2(qhist);
+  %qhist_MEAN = mean2(qhist);
+  %qhist = (qhist - qhist_MEAN) / qhist_STD;
   
   compactness_STD = std2(compactness);
   compactness_MEAN = mean2(compactness);
   compactness = (compactness - compactness_MEAN) / compactness_STD;
   
+  color_STD = std2(color);
+  color_MEAN = mean2(color);
+  color = (color - color_MEAN) / color_STD;
+  
   
   %% saving workspace
-  save('descriptors/descriptors.mat', 'images', 'labels', 'CEDD', 'hu', 'qhist', 'compactness');
+  save('descriptors/descriptors.mat', 'images', 'labels', 'CEDD', 'hu', 'color', 'compactness');
   
 end

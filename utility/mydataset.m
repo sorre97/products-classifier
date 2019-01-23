@@ -5,15 +5,13 @@ close all
 d = uigetdir(pwd, 'tmp');
 files = dir(fullfile(d, '*.JPG'));
 
-COUNTER = 1047;
+COUNTER = 1033;
 END = numel(files);
 SCALE = 0.25;
 
 for i = 1 : END
    image = files(i);
    im = im2double(imread([image.folder '/' image.name]));
-   
-   %imw = white_balance(im);
    
    BW = segmentation(im);
    
