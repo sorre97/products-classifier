@@ -3,7 +3,7 @@ Lista:
 2  - CocaCola
 3  - Cioccolato fondente
 4  - Mela
-5  - Cornetto algida
+5  - +Cornetto algida
 6  - Limone
 7  - Yougurt Yomo
 8  - Pasta integrale

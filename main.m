@@ -1,13 +1,16 @@
 clear all
 close all
 
+products = [];
+
 NROWS = 3;
 NCOLUMNS = 3;
 NFIGURE = 0;
 
 %% intro
 % original image
-image = im2double(imread('test/0126.JPG'));
+image = im2double(imread('test/0170.JPG'));
+image = imresize(image, 0.3);
 figure(1), NFIGURE = NFIGURE + 1;
 subplot(NROWS, NCOLUMNS, NFIGURE), imshow(image), title("Original image");
 
@@ -69,6 +72,7 @@ for i = 1 : n_labels
 
     % macro classification
     object_label = macro_classification(ROI);
+    products = [products; object_label];
     
     % macro labelling
     if(i == 1)
@@ -96,3 +100,16 @@ switch answer
         figure,
         imshow(labelled_image);
 end
+
+%% print shoplist
+total = 0;
+fprintf("%19s\n", "Product Classifier");
+fprintf("%15s\n", "SCONTRINO");
+for i = 1 : numel(products)
+    current_price = object_price(products(i));
+    if(current_price ~= 0)
+        fprintf("%-13s %.2f%c\n", char(products(i)), current_price, '€');
+    end
+    total = total + current_price;
+end
+fprintf("%-13s %.2f%c\n","TOTALE" , total, '€');
