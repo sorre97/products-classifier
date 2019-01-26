@@ -3,9 +3,10 @@ close all
 
 % loads photos, white balances them and renames according to counter
 d = uigetdir(pwd, 'tmp');
-files = dir(fullfile(d, '*.JPG'));
+%files = dir(fullfile(d, '*.JPG'));
+files = dir(fullfile(d, '*.png'));
 
-COUNTER = 1033;
+COUNTER = 1139;
 END = numel(files);
 SCALE = 0.25;
 
@@ -14,6 +15,7 @@ for i = 1 : END
    im = im2double(imread([image.folder '/' image.name]));
    
    BW = segmentation(im);
+   %BW = imopen(imfill(~imbinarize(rgb2gray(im)), 'holes'), strel('disk', 9));
    
    % finding current mask boundaries
    [rows, columns] = find(BW);
@@ -39,7 +41,7 @@ for i = 1 : END
    %imw = imresize(im, SCALE);
    %imw = rgb2gray(im); 
    
-   ROI = imresize(ROI, SCALE);
+   %ROI = imresize(ROI, SCALE);
    
    if(COUNTER < 10)
        filename = ['000' num2str(COUNTER)];
@@ -53,6 +55,6 @@ for i = 1 : END
    
    COUNTER = COUNTER + 1;
    
-   imwrite(ROI, [ 'dataset/' filename '.png']);
-   %imwrite(im, [ 'dataset/' filename '.png']);
+   %imwrite(ROI, [ 'dataset/' filename '.png']);
+   imwrite(im, [ 'dataset/' filename '.png']);
 end

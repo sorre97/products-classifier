@@ -130,7 +130,7 @@ end
     % applying a mask based on extended minima transform
     % (increment the second parameter to avoid the segmentation 
     % between the object)
-    mask = imextendedmin(D,15);
+    mask = imextendedmin(D,10);
     %figure, imshow(mask);
     
     % modifying distance image so it only has regional minima 
