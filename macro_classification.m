@@ -60,7 +60,7 @@ fprintf('%s - %s\n', g, char(object_label));
 
 % if probability of recognition is below treshold T, the object is not recognized
 % unknown class is assigned
-T = 0.70;
+T = 0.65;
 if(max(prob) < T)
     object_label = cellstr('unknown');
 end
