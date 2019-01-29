@@ -2,10 +2,10 @@ Algida
 Sprite
 Viviverde
 Aranciata
-unknown
+Yomo
 Ghiaccioli
 CocaCola
-Algida
+Cioccolato
 Pasta
 Limone
 Milka

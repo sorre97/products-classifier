@@ -1,8 +1,8 @@
 Aranciata
 Passata
-unknown
 Mandarino
-unknown
+Mandarino
+Mela
 CocaCola
 Passata
 Mela
@@ -14,4 +14,3 @@ Milka
 Algida
 Sprite
 Integrale
-unknown

@@ -13,7 +13,10 @@ function segmentated_image = segmentation(image, verbose)
 
     NROWS = 3;
     NCOLUMNS = 3;
-    figure(2)
+    
+    if(verbose)
+        figure(2)
+    end
 
     img = rgb2gray(image);
     

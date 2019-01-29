@@ -29,25 +29,23 @@ for i = 1 : END
    txt = fopen(['validation_set_txt/' txt_filename]);
    tline = fgetl(txt);
    
-   i = 1;
-   while ischar(tline) && i <= length(product_labels)
+   j = 1;
+   while ischar(tline) && j <= length(product_labels)
        % DEBUG
        %disp(tline)
-       %disp(char(product_labels(i, 1)))
+       %disp(char(product_labels(j, 1)))
        
        correct_labels = [correct_labels; cellstr(tline)];
-       predicted_labels = [predicted_labels; cellstr(product_labels(i, 1))];
+       predicted_labels = [predicted_labels; cellstr(product_labels(j, 1))];
        
        tline = fgetl(txt);
-       i = i + 1;
+       j = j + 1;
    end
-     
-   i = 1;
+
    fclose(txt);
 end
 
 %% confusion matrix
-%[C,order] = confusionmat(predicted_labels, correct_labels);
 cm = confusionchart(correct_labels, predicted_labels);
 cm.Title = 'Product Classification Using KNN';
 cm.RowSummary = 'absolute';
