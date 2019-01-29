@@ -3,8 +3,8 @@ close all
 
 % loads photos, white balances them and renames according to counter
 d = uigetdir(pwd, 'tmp');
-%files = dir(fullfile(d, '*.JPG'));
-files = dir(fullfile(d, '*.png'));
+files = dir(fullfile(d, '*.JPG'));
+%files = dir(fullfile(d, '*.png'));
 
 COUNTER = 1139;
 END = numel(files);
@@ -55,6 +55,6 @@ for i = 1 : END
    
    COUNTER = COUNTER + 1;
    
-   %imwrite(ROI, [ 'dataset/' filename '.png']);
-   imwrite(im, [ 'dataset/' filename '.png']);
+   imwrite(ROI, [ 'dataset/' filename '.png']);
+   %imwrite(im, [ 'dataset/' filename '.png']);
 end

@@ -1,4 +1,4 @@
-function segmentated_image = segmentation(image, print)
+function segmentated_image = segmentation(image, verbose)
 %segmentation - segmentation of image
 %
 %
@@ -10,14 +10,10 @@ function segmentated_image = segmentation(image, print)
 %
 %
 %------------- BEGIN CODE --------------
-if(exist('print', 'var') && strcmp(print, 'verbose'))
-    verbose = true;
+
     NROWS = 3;
     NCOLUMNS = 3;
     figure(2)
-else
-    verbose = false;
-end
 
     img = rgb2gray(image);
     
@@ -130,7 +126,7 @@ end
     % applying a mask based on extended minima transform
     % (increment the second parameter to avoid the segmentation 
     % between the object)
-    mask = imextendedmin(D,10);
+    mask = imextendedmin(D,13);
     %figure, imshow(mask);
     
     % modifying distance image so it only has regional minima 

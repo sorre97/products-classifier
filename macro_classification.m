@@ -53,10 +53,10 @@ CompactMdl = loadCompactModel('classificators/macroClassificationKNN.mat');
 
 %% unknown class
 % printing confidence of recognition for each class
-g=sprintf('%.8f ', prob);
-fprintf('Confidence probability:\n');
-fprintf("%10s%10s%10s%10s%10s%10s%10s%10s\n", "algida", "chocolate", "cocacola", "limone", "apple", "pasta", "yogurt", "integrale");
-fprintf('%s - %s\n', g, char(object_label));
+%g=sprintf('%.8f ', prob);
+%fprintf('Confidence probability:\n');
+%fprintf("%10s%10s%10s%10s%10s%10s%10s%10s\n", "algida", "chocolate", "cocacola", "limone", "apple", "pasta", "yogurt", "integrale");
+%fprintf('%s - %s\n', g, char(object_label));
 
 % if probability of recognition is below treshold T, the object is not recognized
 % unknown class is assigned
