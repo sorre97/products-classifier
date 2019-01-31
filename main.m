@@ -32,7 +32,7 @@ function products = main(filename, verbose)
     
     %% binarization
     %im = imfilter(im, fspecial('average')); %smoothing
-    im = imgaussfilt(im);
+    %im = imgaussfilt(im);
     BW = segmentation(im, verbose);
     if(verbose)
         figure(1), NFIGURE = NFIGURE + 1;
