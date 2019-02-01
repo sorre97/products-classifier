@@ -13,6 +13,4 @@ cv = cvpartition(labels, 'Holdout', 0.2);
 result = test_macro_classifier(descriptor_vector, labels, cv);
 
 perf = [result.accuracy];
-    
-%figure, bar(perf), xlabel("Number of try"), ylabel("Accuracy on test");
 

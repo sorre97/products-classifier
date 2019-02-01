@@ -21,18 +21,12 @@ function products = main(filename, verbose)
     end
     %% white balancing
     im = white_balance(image);
-    %im = image;
-    %im(:, :, 1) = imadjust(im(:, :, 1));
-    %im(:, :, 2) = imadjust(im(:, :, 2));
-    %im(:, :, 3) = imadjust(im(:, :, 3));
     if(verbose)
         figure(1), NFIGURE = NFIGURE + 1;
         subplot(NROWS, NCOLUMNS, NFIGURE), imshow(im), title("White balanced image");
     end
     
     %% binarization
-    %im = imfilter(im, fspecial('average')); %smoothing
-    %im = imgaussfilt(im);
     BW = segmentation(im, verbose);
     if(verbose)
         figure(1), NFIGURE = NFIGURE + 1;
@@ -78,10 +72,7 @@ function products = main(filename, verbose)
         ROI(:, :, 1) = objectR(topRow:bottomRow, leftColumn:rightColumn);
         ROI(:, :, 2) = objectG(topRow:bottomRow, leftColumn:rightColumn);
         ROI(:, :, 3) = objectB(topRow:bottomRow, leftColumn:rightColumn);
-
-        % individual ROI
-        % figure, imshow(ROI), title("ROI");
-
+        
         % macro classification
         object_label = macro_classification(ROI);
         products = [products; object_label];
@@ -104,22 +95,15 @@ function products = main(filename, verbose)
 
 
     %% bounding box
-    %answer = questdlg('Plot bounding box?', ...
-    % 	'bounding box', ...
-    % 	'Yes','Nope','Yes');
-    answer = 'Yes';
-    % Handle response
-    switch answer
-        case 'Yes'
-            if(verbose)
-                figure(1), NFIGURE = NFIGURE + 1;
-                subplot(NROWS, NCOLUMNS, NFIGURE), imshow(labelled_image), title("Bounding box image");
-            
-                drawBoundingBox(BW);
-                
-                figure,
-                imshow(labelled_image);
-            end
+    if(verbose)
+        figure(1), NFIGURE = NFIGURE + 1;
+        subplot(NROWS, NCOLUMNS, NFIGURE), imshow(labelled_image), title("Bounding box image");
+
+        drawBoundingBox(BW);
+
+        figure,
+        imshow(labelled_image);
+
     end
 
     %% print shoplist

@@ -1,3 +1,6 @@
+% deprecated
+% first used, then abandoned
+
 im = imread('dataset/0094.JPG');
 
 COUNTER = 580;

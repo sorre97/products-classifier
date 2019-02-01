@@ -7,7 +7,6 @@ function create_macro_descriptor_files()
   % feature vector
   CEDD = [];
   hu = [];
-  qhist = [];
   compactness = [];
   color = [];
     
@@ -28,7 +27,6 @@ function create_macro_descriptor_files()
     
     hu = [hu; Hu_Moments(SI_Moment(BW))];
     CEDD = [CEDD; compute_CEDD(im2uint8(im))];
-    %qhist = [qhist; compute_qhist(im)];
     compactness = [compactness; compute_compactness(BW)];
     color = [color; compute_average_color(HSV)];
     
@@ -42,10 +40,6 @@ function create_macro_descriptor_files()
   hu_STD = std2(hu);
   hu_MEAN = mean2(hu);
   hu = (hu - hu_MEAN) / hu_STD;
-  
-  %qhist_STD = std2(qhist);
-  %qhist_MEAN = mean2(qhist);
-  %qhist = (qhist - qhist_MEAN) / qhist_STD;
   
   compactness_STD = std2(compactness);
   compactness_MEAN = mean2(compactness);

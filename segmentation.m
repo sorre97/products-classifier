@@ -53,7 +53,7 @@ function segmentated_image = segmentation(image, verbose)
     %% Edge
     % Edge extraction using Canny method
     edge2 = edge(img, 'Canny', 0.1);
-    %edge2 = edge(img, 'Canny', 0.05);
+    
     if(verbose)
         subplot(NROWS, NCOLUMNS, 2), imshow(edge2), title("Edges");
     end
@@ -74,16 +74,9 @@ function segmentated_image = segmentation(image, verbose)
     
     %% morphology
     
-    % ALTERNATIVE
-    % dilatation and erosion to connect borders
-    % structuring element
-    %SE = strel('square', 8);
-    %morph = imclose(BW, SE);
-    
     SE = strel('disk', 3);
 
     % dilatation to close object borders
-    %morph = bwareaopen(BW, 4000);
     morph = imdilate(BW, SE);
     if(verbose)
         subplot(NROWS, NCOLUMNS, 4), imshow(morph), title("Morph dilatation");
@@ -124,21 +117,19 @@ function segmentated_image = segmentation(image, verbose)
     
     % calculating euclidean distance of not morph
     D = -bwdist(imcomplement(morph));
-    %figure, imshow(D,[]);
     
     % applying a mask based on extended minima transform
     % (increment the second parameter to avoid the segmentation 
-    % between the object)
+    % between the objects)
     mask = imextendedmin(D,7);
-    %figure, imshow(mask);
     
     % modifying distance image so it only has regional minima 
-    % wherever binary marker image BW is nonzero. (?)
+    % wherever binary marker image BW is nonzero.
     D2 = imimposemin(D,mask);
     
     % applying watershed transform in order to segment the image
     Ld2 = watershed(D2);
-    %figure, imshow(label2rgb(Ld2));
+    
     finalImage = morph;
     finalImage(Ld2 == 0) = 0;
     

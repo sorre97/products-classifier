@@ -3,7 +3,6 @@ clear all
 tic
 
 % loads photos, white balances them and renames according to counter
-%d = uigetdir(pwd, 'tmp');
 files = dir(fullfile('./test', '*.JPG'));
 
 COUNTER = 1;

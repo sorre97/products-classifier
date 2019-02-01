@@ -23,11 +23,9 @@ BWROI = imfill(rgb2gray(im2uint8(ROI)) > 0, 'holes');
 
 CEDD = compute_CEDD(im2uint8(ROI));
 hu = Hu_Moments(SI_Moment(BWROI));
-%qhist = compute_qhist(im2uint8(ROI));
 compactness = compute_compactness(BWROI);
 color = compute_average_color(ROIHSV);
 
-%figure, imshow(ROI);
 
 % feature normalization
 CEDD_STD = std2(CEDD);
@@ -40,16 +38,13 @@ hu_MEAN = mean2(hu);
 hu = (hu - hu_MEAN) / hu_STD;
 
 
-%qhist_STD = std2(qhist);
-%qhist_MEAN = mean2(qhist);
-%qhist = (qhist - qhist_MEAN) / qhist_STD;
-
-
 %% classification
 % importing classifier
 CompactMdl = loadCompactModel('classificators/macroClassificationKNN.mat');
+
 % classification
 [object_label, prob] = predict(CompactMdl, [hu compactness color CEDD]);
+
 %% unknown class
 % printing confidence of recognition for each class
 %g=sprintf('%.8f ', prob);
