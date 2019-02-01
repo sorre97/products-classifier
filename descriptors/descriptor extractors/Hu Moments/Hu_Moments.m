@@ -1,11 +1,8 @@
 function inv_moments = Hu_Moments(eta)
 % Function to calculate the Hu's moments of interested image region
-% Author:   Vishnu Muralidharan
-% University of Alabama in Huntsville
 
 % Inputs:   eta: scale-invariant moment matrix of order 3
 % Outputs:  inv_moments = array containing 7 invariant Hu's moments
-% Reference:  Visual Pattern Recognition by Moment Invariants
 
 
 %Calculation of various invariant Hu's moments

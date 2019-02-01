@@ -1,14 +1,11 @@
 function m = moment(image,mask,p,q)
 % Function to calculate any ordinary moment of the intersted image region
-% Author:   Vishnu Muralidharan
-% University of Alabama in Huntsville
 
 % Inputs:   image: input image for which moments need to be calculated
 %           mask: specifying this allows you to calculate moments for a
 %           specified region
 %           p,q: order of moments to be calculated
 % Outputs:  m = moment of the specifed order fot the image
-% Reference:  Visual Pattern Recognition by Moment Invariants
 
 
 if ~exist('mask','var')

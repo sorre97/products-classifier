@@ -1,14 +1,11 @@
 function eta = SI_Moment(image, mask)
 % Function to calculate the scale-invariant moment of interested image region
-% Author:   Vishnu Muralidharan
-% University of Alabama in Huntsville
 
 % Inputs:   image: image: input image for which moments need to be calculated
 %           mask: specifying this allows you to calculate moments for a
 %           specified region
 %           
 % Outputs:  cen_mmt = central moment of the specifed order fot the image
-% Reference:  Visual Pattern Recognition by Moment Invariants
 
 
 image = double(image);

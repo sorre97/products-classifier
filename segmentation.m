@@ -129,7 +129,7 @@ function segmentated_image = segmentation(image, verbose)
     % applying a mask based on extended minima transform
     % (increment the second parameter to avoid the segmentation 
     % between the object)
-    mask = imextendedmin(D,13);
+    mask = imextendedmin(D,7);
     %figure, imshow(mask);
     
     % modifying distance image so it only has regional minima 

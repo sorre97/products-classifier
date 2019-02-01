@@ -1,14 +1,11 @@
 function cen_mmt = Centr_Moment(image,mask,p,q)
 % Function to calculate the central moment of interested image region
-% Author:   Vishnu Muralidharan
-% University of Alabama in Huntsville
 
 % Inputs:   image: image: input image for which moments need to be calculated
 %           mask: specifying this allows you to calculate moments for a
 %           specified region
 %           p,q: order of moments to be calculated
 % Outputs:  cen_mmt = central moment of the specifed order fot the image
-% Reference:  Visual Pattern Recognition by Moment Invariants
 
 
 if ~exist('mask','var')
