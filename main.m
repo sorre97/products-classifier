@@ -2,6 +2,7 @@ function products = main(filename, verbose)
 
     products = [];
     
+    % if verbose = 'verbose' then all figures are shown
     if(exist('verbose', 'var') && strcmp(verbose, 'verbose'))
         verbose = true;
         NROWS = 3;
