@@ -1,8 +1,28 @@
 function products = main(filename, verbose)
+% main - classifies series of products in a given image according
+% to dataset
+%
+%
+% Inputs:
+%    filename - image containing objects to classify
+%    verbose  - if 'verbose' then all figures are shown
+%    
+% Outputs:
+%    products - label of the classified products inside image 
+%
+% Authors: Sorrentino Alessandro Mat. 815999
+%          Zuccarella Stefano    Mat. 816482
+%          Ratti      Burt       Mat. 816243
+% 
+% Università degli studi di Milano-Bicocca UNIMIB
+% Image processing project - academic year 2018/2019
+% 
+%
+%
 
+    %% Prelude
     products = [];
     
-    % if verbose = 'verbose' then all figures are shown
     if(exist('verbose', 'var') && strcmp(verbose, 'verbose'))
         verbose = true;
         NROWS = 3;
@@ -20,6 +40,7 @@ function products = main(filename, verbose)
         figure(1), NFIGURE = NFIGURE + 1;
         subplot(NROWS, NCOLUMNS, NFIGURE), imshow(image), title("Original image");
     end
+    
     %% white balancing
     im = white_balance(image);
     if(verbose)
@@ -125,3 +146,4 @@ function products = main(filename, verbose)
     end
 
 end
+%------------- END OF CODE -------------- 
