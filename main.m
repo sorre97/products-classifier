@@ -137,12 +137,12 @@ function products = main(filename, verbose)
     for i = 1 : numel(products)
         current_price = object_price(products(i));
         if(current_price ~= 0 && verbose)
-            fprintf("%-13s %.2f%c\n", char(products(i)), current_price, '€');
+            fprintf("%-13s %.2f%c\n", char(products(i)), current_price, char(8364));
         end
         total = total + current_price;
     end
     if(verbose)
-        fprintf("%-13s %.2f%c\n","TOTALE" , total, '€');
+        fprintf("%-13s %.2f%c\n","TOTALE" , total, char(8364));
     end
 
 end
